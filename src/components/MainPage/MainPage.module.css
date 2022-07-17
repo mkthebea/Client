@@ -1,0 +1,17 @@
+.title {
+    font-size: 30px;
+    text-align: center;
+    color: white;
+}
+
+.table_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table {
+    min-height: 80vh;
+    width: 90%;
+    /* background-color: white; */
+}

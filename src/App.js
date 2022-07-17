@@ -1,6 +1,6 @@
 import { LoginOutlined, ClockCircleOutlined, PlusCircleOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import React, { useState, useEffect, Component } from "react";
 import { Link, BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import DetailPage from "./components/DetailPage/DetailPage";
