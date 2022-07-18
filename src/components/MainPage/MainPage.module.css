@@ -13,5 +13,6 @@
 .table {
     min-height: 80vh;
     width: 90%;
+    text-align: center;
     /* background-color: white; */
 }

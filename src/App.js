@@ -9,7 +9,7 @@ import MainPage from "./components/MainPage/MainPage";
 import MyMatchingPage from "./components/MyMatchingPage/MyMatchingPage";
 import RegisterPage from "./components/RegisterPage/RegisterPage";
 import SignupPage from "./components/SignupPage/SignupPage";
-import "./App.css";
+import styles from "./App.module.css";
 import Logo from "./Logo.jpg";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -21,7 +21,7 @@ const App = () => {
       <Layout>
         <Sider trigger={null} collapsible collapsed={collapsed} theme="light" style={{ backgroundColor: "rgb(110,165,254)" }}>
           <Link to="/">
-            <img src={Logo} style={{ width: "100%", textAlign: "center" }} />
+            <img src={Logo} className={styles.logo} />
           </Link>
           <Menu theme="light" mode="inline" defaultSelectedKeys={["1"]} style={{ backgroundColor: "rgb(110,165,254)", color: "white" }}>
             <Menu.Item key="login" icon={<LoginOutlined />}>
@@ -37,20 +37,21 @@ const App = () => {
         </Sider>
         <Layout className="site-layout">
           <Header
-            className="site-layout-background"
-            style={{
-              padding: 0,
-              backgroundColor: "white",
-              // textAlign: "center",
-              fontWeight: "bolder",
-              fontSize: "20px",
-              height: "10vh",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "0px 50px 0px 20px",
-              color: "black",
-            }}
+            // className="site-layout-background"
+            className={styles.header}
+            // style={{
+            //   padding: 0,
+            //   backgroundColor: "white",
+            //   // textAlign: "center",
+            //   fontWeight: "bolder",
+            //   fontSize: "20px",
+            //   height: "10vh",
+            //   display: "flex",
+            //   justifyContent: "space-between",
+            //   alignItems: "center",
+            //   padding: "0px 50px 0px 20px",
+            //   color: "black",
+            // }}
           >
             <div style={{ color: "rgb(110,165,254)" }}>
               {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
@@ -58,9 +59,16 @@ const App = () => {
                 onClick: () => setCollapsed(!collapsed),
               })}
             </div>
-            <Link to="/">
+            {/* <Link to="/">
               <span style={{ color: "red", fontSize: "30px" }}>맛</span>집 매<span style={{ color: "blue", fontSize: "30px" }}>칭</span>은, <span style={{ fontSize: "30px" }}>맛칭!</span>
-            </Link>
+            </Link> */}
+            <div className={styles.food_container}>
+              <div className={styles.food}>🍔</div>
+              <div className={styles.food2}>🍜</div>
+              <div className={styles.food}>🍕</div>
+              <div className={styles.food2}>🥗</div>
+              <div className={styles.food}>🍦</div>
+            </div>
           </Header>
           <Content
             className="site-layout-background"
