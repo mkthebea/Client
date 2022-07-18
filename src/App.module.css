@@ -58,13 +58,12 @@
   background: #fff;
 } */
 
-/* custom */
 
+/* custom */
 .logo {
   width: 100%;
   text-align: center;
 }
-
 .header {
   background: #fff;
   padding: 0;
@@ -92,7 +91,7 @@
 }
 
 .food_container{
-  width: 20%;
+  /* width: 20%; */
   display: flex;
   justify-content: space-around;
   align-items: baseline;
@@ -107,3 +106,9 @@
   font-size: 30px;
   animation: bounce 0.5s cubic-bezier(.5, 0.05, 1, .5) 0.5s  infinite alternate ;
 }
+
+.text {
+  font-size: 20px;
+  color: rgb(110,165,254);
+}
+

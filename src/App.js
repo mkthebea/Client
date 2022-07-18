@@ -63,6 +63,7 @@ const App = () => {
               <span style={{ color: "red", fontSize: "30px" }}>맛</span>집 매<span style={{ color: "blue", fontSize: "30px" }}>칭</span>은, <span style={{ fontSize: "30px" }}>맛칭!</span>
             </Link> */}
             <div className={styles.food_container}>
+              <div className={styles.text}>맛집 매칭은, 맛칭!&nbsp;&nbsp;&nbsp;</div>
               <div className={styles.food}>🍔</div>
               <div className={styles.food2}>🍜</div>
               <div className={styles.food}>🍕</div>

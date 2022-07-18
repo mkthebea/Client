@@ -4,6 +4,8 @@ import { Button, Input, Space, Table, Tag, Modal } from "antd";
 import Highlighter from "react-highlight-words";
 import { Link } from "react-router-dom";
 import styles from "./MainPage.module.css";
+import moment from "moment";
+import "moment/locale/ko";
 
 import DetailPage from "../DetailPage/DetailPage";
 
@@ -141,6 +143,8 @@ function MainPage() {
       key: "name",
       // render: (text) => <a>{text}</a>,
       ...getColumnSearchProps("name"),
+      width: "200px",
+      align: "center",
     },
     {
       title: "대기자 수",
@@ -148,6 +152,17 @@ function MainPage() {
       key: "waiting",
       sorter: (a, b) => a.waiting - b.waiting,
       sortDirections: ["descend", "ascend"],
+      width: "130px",
+      align: "center",
+    },
+    {
+      title: "최대 인원",
+      dataIndex: "max",
+      key: "max",
+      sorter: (a, b) => a.max - b.max,
+      sortDirections: ["descend", "ascend"],
+      width: "130px",
+      align: "center",
     },
     {
       title: "매칭 조건",
@@ -185,6 +200,10 @@ function MainPage() {
               text: "소프트웨어학과",
               value: "소프트웨어학과",
             },
+            {
+              text: "모든 학과",
+              value: "모든 학과",
+            },
           ],
         },
         {
@@ -210,6 +229,10 @@ function MainPage() {
         <>
           {tags.map((tag) => {
             let color = tag.length > 5 ? "geekblue" : "magenta";
+
+            if (tag === "모든 학과") {
+              color = "gold";
+            }
 
             if (tag === "여성") {
               color = "volcano";
@@ -238,9 +261,14 @@ function MainPage() {
       ),
     },
     {
-      title: "날짜",
+      title: "시간",
       dataIndex: "date",
       key: "date",
+      // render: (time) => <>{time.format("YYYY-MM-DD hh:mm")}</>,
+      // sorter: (a, b) => a.date - b.date,
+      // sortDirections: ["descend", "ascend"],
+      width: "250px",
+      align: "center",
     },
     {
       title: "매칭 신청",
@@ -251,9 +279,12 @@ function MainPage() {
         // <Button type="primary" onClick={showModal}>
         //   신청하기😋
         // </Button>
-        <Button onClick={() => showModal(data)}>신청하기😋</Button>
-        // </Space>
+        <Space>
+          <Button onClick={() => showModal(data)}>신청하기😋</Button>
+        </Space>
       ),
+      width: "150px",
+      align: "center",
     },
   ];
 
@@ -263,8 +294,9 @@ function MainPage() {
       name: "우뇽파스타",
       waiting: 2,
       tags: ["여성", "산업보안학과", "우리 친해져요"],
-      date: "2022-08-18 3:00pm",
+      date: "2022-08-10 16:00",
       description: "여기 맛있어요!",
+      max: 5,
       id: 1,
     },
     {
@@ -272,8 +304,9 @@ function MainPage() {
       name: "북촌순두부",
       waiting: 0,
       tags: ["남성", "경영학과", "밥만 먹어요"],
-      date: "2022-08-18",
+      date: "2022-07-20 16:00",
       description: "햄치즈 순두부 맛집",
+      max: 2,
       id: 2,
     },
     {
@@ -281,17 +314,82 @@ function MainPage() {
       name: "카우버거",
       waiting: 1,
       tags: ["성별 무관", "소프트웨어학과", "우리 친해져요"],
-      date: "2022-08-18",
+      date: "2022-08-18 16:00",
       description: "친구를 사귀고 싶어요ㅠㅠ",
+      max: 2,
       id: 3,
+    },
+    {
+      key: "4",
+      name: "라이스&포테이토",
+      waiting: 0,
+      tags: ["성별 무관", "산업보안학과", "우리 친해져요"],
+      date: "2022-07-30 15:00",
+      description: "근본 밥약 장소.. 랄까?",
+      max: 2,
+      id: 4,
+    },
+    {
+      key: "5",
+      name: "장독대",
+      waiting: 1,
+      tags: ["성별 무관", "국제물류학과", "우리 친해져요"],
+      date: "2022-07-30 16:00",
+      description: "꿀막걸리 먹을 사람 구해요",
+      max: 2,
+      id: 5,
+    },
+    {
+      key: "6",
+      name: "인근주민",
+      waiting: 1,
+      tags: ["여성", "모든 학과", "우리 친해져요"],
+      date: "2022-08-19 16:00",
+      description: "간술~",
+      max: 2,
+      id: 6,
+    },
+    {
+      key: "7",
+      name: "엉터리생고기",
+      waiting: 1,
+      tags: ["남성", "기계공학과", "우리 친해져요"],
+      date: "2022-08-11 16:00",
+      description: "과제메이트 겸 고기메이트 찾습니다",
+      max: 2,
+      id: 7,
+    },
+    {
+      key: "8",
+      name: "중대양곱창",
+      waiting: 1,
+      tags: ["성별 무관", "모든 학과", "밥만 먹어요"],
+      date: "2022-08-10 16:00",
+      description: "곱창 혼밥은 싫어서..",
+      max: 2,
+      id: 8,
     },
   ];
 
   return (
     <>
-      {/* <div className={styles.title}>맛칭 리스트</div> */}
+      <h1>
+        <span>M</span>
+        <span>a</span>
+        <span>t</span>
+        <span>C</span>
+        <span>h</span>
+        <span>i</span>
+        <span>n</span>
+        <span>g</span>
+        <span>&nbsp;</span>
+        <span>N</span>
+        <span>o</span>
+        <span>w</span>
+        <span>!</span>
+      </h1>
       <div className={styles.table_container}>
-        <Table columns={columns} dataSource={data} className={styles.table} />
+        <Table scroll={{ y: "65vh" }} pagination={false} columns={columns} dataSource={data} className={styles.table} />
       </div>
       <Modal title="매칭 신청" cancelText="취소" okText="신청하기" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} centered="true" width="60%">
         {/* <DetailPage /> */}
