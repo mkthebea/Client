@@ -15,7 +15,7 @@ import Logo from "./Logo.jpg";
 const { Header, Content, Footer, Sider } = Layout;
 
 const App = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   return (
     <Router>
       <Layout>
