@@ -454,7 +454,7 @@ function MainPage() {
   });
 
   return (
-    <>
+    <div className={styles.container}>
       <h1>
         <span>M</span>
         <span>a</span>
@@ -476,7 +476,7 @@ function MainPage() {
       <Modal title="매칭 신청" cancelText="취소" okText="신청하기" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} centered="true" width="80%">
         <DetailPage data={modalData} setId={setId} />
       </Modal>
-    </>
+    </div>
   );
 }
 
