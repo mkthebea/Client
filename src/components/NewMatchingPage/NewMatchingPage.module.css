@@ -24,3 +24,12 @@
     margin: 20px;
     align-self: center;
 }
+
+.button_container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button {
+    background-color: aqua;
+}

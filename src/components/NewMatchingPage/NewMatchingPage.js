@@ -56,8 +56,8 @@ function NewMatchingPage() {
             <TextArea rows={3} placeholder="maxLength is 30" maxLength={30} />
           </Form.Item>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
+          <Form.Item className={styles.button_container}>
+            <Button type="primary" htmlType="submit" className={styles.button}>
               등록하기
             </Button>
           </Form.Item>
