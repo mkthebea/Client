@@ -12,7 +12,7 @@ function MyMatchingPage() {
     },
     {
       name: "중대양곱창",
-      date: "2022-08-4 00:30",
+      date: "2022-08-04 00:30",
       id: 2,
     },
     {
