@@ -58,13 +58,19 @@ function DetailPage(props) {
               {/* <div className={styles.desc_container}> */}
               <Descriptions title="매칭 정보" bordered>
                 <Descriptions.Item label="맛집">{name}</Descriptions.Item>
-                <Descriptions.Item label="대기자 수">{waiting}</Descriptions.Item>
+                <Descriptions.Item label="대기자">
+                  총 {[...matchings[i].follower].length}명
+                  {matchings[i].follower.map((f) => {
+                    return <div>{f}</div>;
+                  })}
+                </Descriptions.Item>
+                <Descriptions.Item label="최대 인원">{matchings[i].max}</Descriptions.Item>
+
                 <Descriptions.Item label="매칭 조건">
                   성별: {[...matchings[i].tags][0]} <br />
                   학과: {[...matchings[i].tags][1]} <br />
                   만남 모드: {[...matchings[i].tags][2]} <br />
                 </Descriptions.Item>
-                <Descriptions.Item label="최대 인원">{matchings[i].max}</Descriptions.Item>
                 <Descriptions.Item label="시간">{matchings[i].date}</Descriptions.Item>
                 <Descriptions.Item label="한줄 소개">{matchings[i].description}</Descriptions.Item>
               </Descriptions>
