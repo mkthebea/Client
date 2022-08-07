@@ -7,7 +7,7 @@ function MyMatchingPage() {
   const data = [
     {
       name: "우뇽파스타",
-      date: "2022-08-1 16:00",
+      date: "2022-08-01 16:00",
       id: 1,
     },
     {

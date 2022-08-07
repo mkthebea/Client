@@ -1,12 +1,26 @@
 import React, { useState } from "react";
-import { Button, Cascader, TimePicker, DatePicker, Form, Input, InputNumber, Radio, Select, Switch, TreeSelect } from "antd";
+import { Button, TimePicker, DatePicker, Form, Input, InputNumber, Select, message } from "antd";
 import styles from "./NewMatchingPage.module.css";
 
 function NewMatchingPage() {
   const { TextArea } = Input;
 
   const onFinish = (values) => {
-    console.log("Success:", values);
+    let data = values;
+    const date = data["date"].format("YYYY-MM-DD");
+    const startTime = data["time"][0].format("HH:MM");
+    const endTime = data["time"][1].format("HH:MM");
+    data[date] = date + " " + startTime + " ~ " + endTime;
+
+    // 매칭 등록 요청 보내기
+    const res = true; // Success
+    if (res) {
+      console.log("Success:", data);
+      message.success("등록 완료!");
+    } else {
+      message.error("에러 발생, 다시 시도하세요.");
+    }
+
     // window.location.replace("/");
   };
 
@@ -46,7 +60,9 @@ function NewMatchingPage() {
             </Select>
           </Form.Item>
           <Form.Item label="날짜" name={"date"} rules={[{ required: true, message: "날짜를 선택하세요" }]}>
-            <DatePicker /> &nbsp;&nbsp;
+            <DatePicker />
+          </Form.Item>
+          <Form.Item label="시간" name={"time"} rules={[{ required: true, message: "시간을 선택하세요" }]}>
             <TimePicker.RangePicker />
           </Form.Item>
           <Form.Item label="최대 인원" name={"max"} rules={[{ required: true, message: "최대 인원을 입력하세요" }]}>

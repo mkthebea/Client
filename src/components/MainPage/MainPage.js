@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { SearchOutlined } from "@ant-design/icons";
-import { Button, Input, Space, Table, Tag, Modal } from "antd";
+import { Button, Input, Space, Table, Tag, Modal, message } from "antd";
 import Highlighter from "react-highlight-words";
 import styles from "./MainPage.module.css";
 import moment from "moment";
@@ -24,14 +24,30 @@ function MainPage() {
   // 모달 키 관리
   const [Id, setId] = useState(0);
 
+  // 모달 버튼 관리
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+  // useEffect(() => {
+  //   console.log("버튼 비활성화: ", buttonDisabled);
+  // }, [buttonDisabled]);
+
   const showModal = (data) => {
+    if (data.waiting === 0) setButtonDisabled(true);
     setModalData(data);
     setIsModalVisible(true);
   };
 
   const handleOk = () => {
     console.log("매칭 신청: ", { id: Id });
-    setIsModalVisible(false);
+    // 매칭 신청 요청 보내기
+    const res = false;
+    if (res) {
+      message.success("신청 완료!");
+      setTimeout(() => {
+        setIsModalVisible(false);
+      }, 1000);
+    } else {
+      message.error("에러 발생: 잠시 후 다시 시도하세요.");
+    }
   };
 
   const handleCancel = () => {
@@ -300,7 +316,9 @@ function MainPage() {
       matchings: [
         {
           tags: ["여성", "산업보안학과", "우리 친해져요"],
-          date: "2022-08-10 16:00",
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
           description: "여기 맛있어요!",
           max: 5,
           id: 1,
@@ -308,7 +326,9 @@ function MainPage() {
         },
         {
           tags: ["여성", "산업보안학과", "밥만 먹어요"],
-          date: "2022-08-10 16:00",
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
           description: "같이 가요~",
           max: 3,
           id: 2,
@@ -323,11 +343,13 @@ function MainPage() {
       matchings: [
         {
           tags: ["남성", "경영학과", "밥만 먹어요"],
-          date: "2022-07-20 16:00",
+          startTime: "2022-08-10 15:00",
+          endTime: "2022-08-10 18:00",
+          duration: "3시간",
           description: "햄치즈 순두부 맛집",
-          max: 2,
+          max: 4,
           id: 3,
-          follower: ["밈갬", "영갬", "오구"],
+          follower: ["밈", "영", "구"],
         },
       ],
     },
@@ -338,132 +360,136 @@ function MainPage() {
       matchings: [
         {
           tags: ["성별 무관", "소프트웨어학과", "우리 친해져요"],
-          date: "2022-08-18 16:00",
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
           description: "친구를 사귀고 싶어요ㅠㅠ",
-          max: 2,
+          max: 3,
           id: 4,
-          follower: ["밈갬", "영갬", "오구"],
+          follower: ["밈갬"],
         },
         {
           tags: ["여성", "모든 학과", "우리 친해져요"],
-          date: "2022-08-18 16:00",
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
           description: "",
           max: 2,
           id: 5,
-          follower: ["밈갬", "영갬", "오구"],
+          follower: [],
         },
         {
           tags: ["남성", "소프트웨어학과", "밥만 먹어요"],
-          date: "2022-08-18 16:00",
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
           description: "배고파요",
-          max: 2,
+          max: 3,
           id: 6,
-          follower: ["밈갬", "영갬", "오구"],
+          follower: ["밈갬"],
         },
         {
           tags: ["성별 무관", "소프트웨어학과", "우리 친해져요"],
-          date: "2022-08-18 16:00",
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
           description: "카벅",
           max: 2,
           id: 7,
-          follower: ["밈갬", "영갬", "오구"],
+          follower: [],
         },
         {
           tags: ["성별 무관", "소프트웨어학과", "우리 친해져요"],
-          date: "2022-08-18 16:00",
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
           description: "친구를 사귀고 싶어요ㅠㅠ",
-          max: 2,
+          max: 3,
           id: 8,
-          follower: ["밈갬", "영갬", "오구"],
+          follower: ["밈갬"],
         },
       ],
     },
-    {
-      key: "4",
-      name: "라이스&포테이토",
-      waiting: 1,
-      matchings: [
-        {
-          tags: ["성별 무관", "산업보안학과", "우리 친해져요"],
-          date: "2022-07-30 15:00",
-          description: "근본 밥약 장소.. 랄까?",
-          max: 2,
-          id: 9,
-          follower: ["밈갬", "영갬", "오구"],
-        },
-      ],
-    },
-    {
-      key: "5",
-      name: "장독대",
-      waiting: 1,
-      matchings: [
-        {
-          tags: ["성별 무관", "국제물류학과", "우리 친해져요"],
-          date: "2022-07-30 16:00",
-          description: "꿀막걸리 먹을 사람 구해요",
-          max: 2,
-          id: 10,
-          follower: ["밈갬", "영갬", "오구"],
-        },
-      ],
-    },
-    {
-      key: "6",
-      name: "인근주민",
-      waiting: 1,
-      matchings: [
-        {
-          tags: ["여성", "모든 학과", "우리 친해져요"],
-          date: "2022-08-19 16:00",
-          description: "간술~",
-          max: 2,
-          id: 11,
-          follower: ["밈갬", "영갬", "오구"],
-        },
-      ],
-    },
-    {
-      key: "7",
-      name: "엉터리생고기",
-      waiting: 1,
-      matchings: [
-        {
-          tags: ["남성", "기계공학과", "우리 친해져요"],
-          date: "2022-08-11 16:00",
-          description: "과제메이트 겸 고기메이트 찾습니다",
-          max: 2,
-          id: 12,
-          follower: ["밈갬", "영갬", "오구"],
-        },
-      ],
-    },
+    // {
+    //   key: "4",
+    //   name: "라이스&포테이토",
+    //   waiting: 1,
+    //   matchings: [
+    //     {
+    //       tags: ["성별 무관", "산업보안학과", "우리 친해져요"],
+    //       date: "2022-07-30 15:00",
+    //       description: "근본 밥약 장소.. 랄까?",
+    //       max: 2,
+    //       id: 9,
+    //       follower: ["밈갬", "영갬", "오구"],
+    //     },
+    //   ],
+    // },
+    // {
+    //   key: "5",
+    //   name: "장독대",
+    //   waiting: 1,
+    //   matchings: [
+    //     {
+    //       tags: ["성별 무관", "국제물류학과", "우리 친해져요"],
+    //       date: "2022-07-30 16:00",
+    //       description: "꿀막걸리 먹을 사람 구해요",
+    //       max: 2,
+    //       id: 10,
+    //       follower: ["밈갬", "영갬", "오구"],
+    //     },
+    //   ],
+    // },
+    // {
+    //   key: "6",
+    //   name: "인근주민",
+    //   waiting: 1,
+    //   matchings: [
+    //     {
+    //       tags: ["여성", "모든 학과", "우리 친해져요"],
+    //       date: "2022-08-19 16:00",
+    //       description: "간술~",
+    //       max: 2,
+    //       id: 11,
+    //       follower: ["밈갬", "영갬", "오구"],
+    //     },
+    //   ],
+    // },
+    // {
+    //   key: "7",
+    //   name: "엉터리생고기",
+    //   waiting: 1,
+    //   matchings: [
+    //     {
+    //       tags: ["남성", "기계공학과", "우리 친해져요"],
+    //       date: "2022-08-11 16:00",
+    //       description: "과제메이트 겸 고기메이트 찾습니다",
+    //       max: 2,
+    //       id: 12,
+    //       follower: ["밈갬", "영갬", "오구"],
+    //     },
+    //   ],
+    // },
     {
       key: "8",
       name: "중대양곱창",
-      waiting: 1,
-      matchings: [
-        {
-          tags: ["성별 무관", "모든 학과", "밥만 먹어요"],
-          date: "2022-08-10 16:00",
-          description: "곱창 혼밥은 싫어서..",
-          max: 2,
-          id: 13,
-          follower: ["밈갬", "영갬", "오구"],
-        },
-      ],
+      waiting: 0,
+      matchings: [{ id: 0 }],
     },
   ];
 
   data.forEach((data) => {
-    data.tags = [
-      ...new Set(
-        data.matchings.reduce((acc, cur) => {
-          acc.push(...cur.tags);
-          return acc;
-        }, [])
-      ),
-    ];
+    if (data.waiting === 0) data.tags = [];
+    else {
+      data.tags = [
+        ...new Set(
+          data.matchings.reduce((acc, cur) => {
+            acc.push(...cur.tags);
+            return acc;
+          }, [])
+        ),
+      ];
+    }
   });
 
   return (
@@ -486,8 +512,18 @@ function MainPage() {
       <div className={styles.table_container}>
         <Table scroll={{ y: "65vh" }} pagination={false} columns={columns} dataSource={data} className={styles.table} />
       </div>
-      <Modal title="매칭 신청" cancelText="취소" okText="신청하기" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} centered="true" width="80%">
-        <DetailPage data={modalData} setId={setId} />
+      <Modal
+        title="매칭 신청"
+        cancelText="취소"
+        okText="신청하기"
+        okButtonProps={{ disabled: buttonDisabled }}
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        centered="true"
+        width="80%"
+      >
+        <DetailPage data={modalData} setId={setId} setButtonDisabled={setButtonDisabled} />
       </Modal>
     </div>
   );
