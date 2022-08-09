@@ -39,7 +39,7 @@ function MainPage() {
   const handleOk = () => {
     console.log("매칭 신청: ", { id: Id });
     // 매칭 신청 요청 보내기
-    const res = false;
+    const res = true;
     if (res) {
       message.success("신청 완료!");
       setTimeout(() => {
