@@ -40,19 +40,6 @@ const App = () => {
           <Header
             // className="site-layout-background"
             className={styles.header}
-            // style={{
-            //   padding: 0,
-            //   backgroundColor: "white",
-            //   // textAlign: "center",
-            //   fontWeight: "bolder",
-            //   fontSize: "20px",
-            //   height: "10vh",
-            //   display: "flex",
-            //   justifyContent: "space-between",
-            //   alignItems: "center",
-            //   padding: "0px 50px 0px 20px",
-            //   color: "black",
-            // }}
           >
             <div style={{ color: "rgb(110,165,254)" }}>
               {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
