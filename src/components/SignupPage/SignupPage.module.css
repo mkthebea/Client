@@ -31,4 +31,10 @@
 
 .text {
     font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.banner {
+    position: absolute;
+    top: 15vh;
 }

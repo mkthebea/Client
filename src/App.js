@@ -9,6 +9,7 @@ import MainPage from "./components/MainPage/MainPage";
 import MyMatchingPage from "./components/MyMatchingPage/MyMatchingPage";
 import RegisterPage from "./components/RegisterPage/RegisterPage";
 import SignupPage from "./components/SignupPage/SignupPage";
+import SignupSuccessPage from "./components/SignupPage/SignupSuccessPage";
 import NewMatchingPage from "./components/NewMatchingPage/NewMatchingPage";
 import styles from "./App.module.css";
 import Logo from "./Logo.jpg";
@@ -83,6 +84,7 @@ const App = () => {
               <Route path="/" element={<MainPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
+              <Route path="/signup/success" element={<SignupSuccessPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/detail" element={<DetailPage />} />
               <Route path="/mymatching" element={<MyMatchingPage />} />
