@@ -1,21 +1,27 @@
 import { React, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, message } from "antd";
 import styles from "./LoginPage.module.css";
 
 function LoginPage() {
-  const [login, setLogin] = useState(false);
-  const fetchLogin = () => {
-    setLogin(!login);
-    console.log("로그인 상태: ", login);
-  };
+  // const [login, setLogin] = useState(false);
+  // const fetchLogin = () => {
+  //   setLogin(!login);
+  //   console.log("로그인 상태: ", login);
+  // };
 
   const onFinish = (values) => {
     // 로그인 성공시 메인 페이지로 이동
+    const login = true; //로그인 요청 응답
     console.log("Success:", values);
-    window.location.replace("/");
-    fetchLogin();
+    if (login) {
+      window.location.replace("/");
+    } else {
+      message.error("로그인 실패");
+    }
+
+    // fetchLogin();
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -36,17 +42,26 @@ function LoginPage() {
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-          <Form.Item label="Username" name="username" rules={[{ required: true, message: "Please input your username!" }]} style={{ width: "100%" }}>
-            <Input />
+          <Form.Item
+            label="학교 이메일"
+            name="userEmail"
+            rules={[
+              {
+                required: true,
+                message: "학교 이메일 주소를 입력하세요.",
+              },
+            ]}
+          >
+            <Input addonAfter="@cau.ac.kr" />
           </Form.Item>
 
-          <Form.Item label="Password" name="password" rules={[{ required: true, message: "Please input your password!" }]}>
+          <Form.Item label="비밀번호" name="password" rules={[{ required: true, message: "Please input your password!" }]}>
             <Input.Password />
           </Form.Item>
 
-          <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 7, span: 16 }}>
+          {/* <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 7, span: 16 }}>
             <Checkbox>Remember me</Checkbox>
-          </Form.Item>
+          </Form.Item> */}
 
           <Form.Item wrapperCol={{ offset: 4, span: 16 }}>
             <Button type="primary" htmlType="submit">
