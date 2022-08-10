@@ -1,29 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./MyMatchingPage.module.css";
-import { Button, Card, List } from "antd";
+import { Button, Card, List, Modal, Select, Checkbox, Input, Form, message } from "antd";
+
 import moment from "moment";
 
 function MyMatchingPage() {
+  const { Option } = Select;
+  const { TextArea } = Input;
+
   const data = [
     {
       name: "우뇽파스타",
       date: "2022-08-01 16:00",
       id: 1,
+      follower: ["밈갬", "영갬", "오구"],
     },
     {
       name: "중대양곱창",
       date: "2022-08-04 00:30",
       id: 2,
+      follower: ["밈갬", "영갬", "오구"],
     },
     {
       name: "피맥하우스",
       date: "2022-08-4 00:50",
       id: 3,
+      follower: ["밈갬", "영갬", "오구"],
     },
     {
       name: "북촌순두부",
-      date: "2022-08-10 16:00",
+      date: "2022-08-1 16:00",
       id: 4,
+      follower: ["밈갬", "영갬", "오구"],
     },
   ];
   const nowTime = new Date();
@@ -62,8 +70,48 @@ function MyMatchingPage() {
   const onCancel = (id) => {
     console.log("cancel: ", id);
   };
-  const onReport = (id) => {
+  const onReport = (id, follower) => {
+    setIsModalVisible(true);
+    setModalData(follower);
     console.log("report: ", id);
+  };
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalData, setModalData] = useState([]);
+  const [reportData, setReportData] = useState({ name: [], category: "", desc: "" });
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const onChange = (e) => {
+    console.log(`checked = ${e.target.value}`);
+  };
+
+  const onFinish = (values) => {
+    console.log("Success:", values);
+    // 신고 요청 보내기
+    const res = true;
+    if (res) {
+      message.success("신고 완료");
+      setTimeout(() => {
+        setIsModalVisible(false);
+      }, 1000);
+    } else {
+      message.error("에러 발생: 잠시 후 다시 시도하세요.");
+    }
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -108,20 +156,14 @@ function MyMatchingPage() {
                   {item.status === "done" ? (
                     <Button
                       onClick={() => {
-                        onReport(item.id);
+                        onReport(item.id, item.follower);
                       }}
                       className={styles.content_button}
                     >
                       신고하기
                     </Button>
                   ) : (
-                    <Button
-                      disabled
-                      onClick={() => {
-                        onReport(item.id);
-                      }}
-                      className={styles.content_button}
-                    >
+                    <Button disabled className={styles.content_button}>
                       신고하기
                     </Button>
                   )}
@@ -130,6 +172,49 @@ function MyMatchingPage() {
             </List.Item>
           )}
         />
+        <Modal title="신고하기" centered visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null} width="60%">
+          <Form
+            className={styles.form}
+            name="basic"
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 8 }}
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+          >
+            <Form.Item
+              label="신고할 닉네임"
+              name="nickname"
+              rules={[
+                {
+                  required: true,
+                  message: "신고할 닉네임을 선택하세요",
+                },
+              ]}
+            >
+              <Checkbox.Group options={modalData} />
+            </Form.Item>
+
+            <Form.Item label="신고 항목 선택" name="category" rules={[{ required: true, message: "신고 항목을 선택하세요." }]}>
+              <Select>
+                <Option value="노쇼">노쇼</Option>
+                <Option value="비매너">비매너</Option>
+                <Option value="정보와 다른 사람">정보와 다른 사람</Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item label="설명" name="desc">
+              <TextArea rows={4} />
+            </Form.Item>
+
+            <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
+              <Button type="primary" htmlType="submit">
+                신고하기
+              </Button>
+            </Form.Item>
+          </Form>
+        </Modal>
       </div>
     </div>
   );
