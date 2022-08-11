@@ -7,14 +7,37 @@ import axios from "axios";
 function SignupPage() {
   const [signUp, setSignUp] = useState(false);
 
+  // 닉네임 리스트 서버에 요청
+  const [nicknameList, setNicknameList] = useState([]);
+  const fetchNicknameList = async () => {
+    const response = await axios.get("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/profile/nickname/");
+    setNicknameList(response.data.nicknameList);
+    console.log(response.data.nicknameList, nicknameList);
+  };
+  useEffect(() => {
+    fetchNicknameList();
+  }, []);
+
   const fetchSignUp = async (values) => {
-    await axios.post("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/account/signup/", values).then((response) => {
+    const accountData = { userEmail: values.userEmail, password: values.password };
+    let profileData = { nickname: values.nickname, major: values.major, gender: values.gender };
+
+    await axios.post("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/account/signup/", accountData).then((response) => {
       if (response.data.success) {
         setSignUp(response.data.success);
+        // console.log("account 응답: ", response);
+        // console.log("account 전송 데이터: ", accountData);
+
+        //account_id
+        profileData["accountId"] = response.data.accountId;
+        axios.post("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/profile/", profileData).then((response2) => {
+          // console.log("profile 응답: ", response2);
+          // console.log("profile 전송 데이터: ", profileData);
+        });
       } else {
         message.error("에러 발생");
       }
-      console.log("전송 데이터: ", values, "\n응답: ", response);
+      // console.log("전송 데이터: ", values, "\n응답: ", response);
     });
     // .catch((error) => {
     //   console.log(error);
@@ -25,6 +48,8 @@ function SignupPage() {
     console.log("values: ", values);
     if (values.password !== values.okPassword) {
       message.error("비밀번호 확인이 틀립니다.");
+    } else if (nicknameList.includes(values.nickname)) {
+      message.error("사용할 수 없는 닉네임입니다.");
     } else {
       values.userEmail += "@cau.ac.kr";
       fetchSignUp(values);

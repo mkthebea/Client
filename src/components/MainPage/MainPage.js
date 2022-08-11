@@ -5,6 +5,7 @@ import Highlighter from "react-highlight-words";
 import styles from "./MainPage.module.css";
 import moment from "moment";
 import "moment/locale/ko";
+import axios from "axios";
 
 import DetailPage from "../DetailPage/DetailPage";
 
@@ -12,7 +13,6 @@ function MainPage() {
   // 모달 관리
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalData, setModalData] = useState({
-    key: "",
     name: "",
     waiting: 0,
     tags: [],
@@ -38,6 +38,7 @@ function MainPage() {
 
   const handleOk = () => {
     console.log("매칭 신청: ", { id: Id });
+    console.log(matchingList);
     // 매칭 신청 요청 보내기
     const res = true;
     if (res) {
@@ -53,6 +54,211 @@ function MainPage() {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+
+  const [matchingList, setMatchingList] = useState([
+    {
+      name: "우뇽파스타",
+      waiting: 2,
+      matchings: [
+        {
+          tags: ["여성", "산업보안학과", "우리 친해져요"],
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
+          description: "여기 맛있어요!",
+          max: 5,
+          id: 1,
+          follower: ["밈갬", "영갬", "오구"],
+        },
+        {
+          tags: ["여성", "산업보안학과", "밥만 먹어요"],
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
+          description: "같이 가요~",
+          max: 3,
+          id: 2,
+          follower: ["밈갬", "영갬"],
+        },
+      ],
+    },
+    {
+      name: "북촌순두부",
+      waiting: 1,
+      matchings: [
+        {
+          tags: ["남성", "경영학과", "밥만 먹어요"],
+          startTime: "2022-08-10 15:00",
+          endTime: "2022-08-10 18:00",
+          duration: "3시간",
+          description: "햄치즈 순두부 맛집",
+          max: 4,
+          id: 3,
+          follower: ["밈", "영", "구"],
+        },
+      ],
+    },
+    {
+      name: "카우버거",
+      waiting: 5,
+      matchings: [
+        {
+          tags: ["성별 무관", "소프트웨어학과", "우리 친해져요"],
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
+          description: "친구를 사귀고 싶어요ㅠㅠ",
+          max: 3,
+          id: 4,
+          follower: ["밈갬"],
+        },
+        {
+          tags: ["여성", "모든 학과", "우리 친해져요"],
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
+          description: "",
+          max: 2,
+          id: 5,
+          follower: [],
+        },
+        {
+          tags: ["남성", "소프트웨어학과", "밥만 먹어요"],
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
+          description: "배고파요",
+          max: 3,
+          id: 6,
+          follower: ["밈갬"],
+        },
+        {
+          tags: ["성별 무관", "소프트웨어학과", "우리 친해져요"],
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
+          description: "카벅",
+          max: 2,
+          id: 7,
+          follower: [],
+        },
+        {
+          tags: ["성별 무관", "소프트웨어학과", "우리 친해져요"],
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
+          description: "친구를 사귀고 싶어요ㅠㅠ",
+          max: 3,
+          id: 8,
+          follower: ["밈갬"],
+        },
+      ],
+    },
+    {
+      name: "라이스&포테이토",
+      waiting: 1,
+      matchings: [
+        {
+          tags: ["성별 무관", "산업보안학과", "우리 친해져요"],
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
+          description: "친구를 사귀고 싶어요ㅠㅠ",
+          max: 3,
+          id: 9,
+          follower: ["밈갬"],
+        },
+      ],
+    },
+    {
+      name: "장독대",
+      waiting: 1,
+      matchings: [
+        {
+          tags: ["성별 무관", "국제물류학과", "우리 친해져요"],
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
+          description: "친구를 사귀고 싶어요ㅠㅠ",
+          max: 3,
+          id: 10,
+          follower: ["밈갬"],
+        },
+      ],
+    },
+    {
+      name: "인근주민",
+      waiting: 1,
+      matchings: [
+        {
+          tags: ["여성", "모든 학과", "우리 친해져요"],
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
+          description: "친구를 사귀고 싶어요ㅠㅠ",
+          max: 3,
+          id: 11,
+          follower: ["밈갬"],
+        },
+      ],
+    },
+    {
+      name: "엉터리생고기",
+      waiting: 1,
+      matchings: [
+        {
+          tags: ["남성", "기계공학과", "우리 친해져요"],
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
+          description: "친구를 사귀고 싶어요ㅠㅠ",
+          max: 3,
+          id: 12,
+          follower: ["밈갬"],
+        },
+      ],
+    },
+    {
+      name: "중대양곱창",
+      waiting: 0,
+      matchings: [{ id: 0 }],
+    },
+  ]);
+
+  const fetchMatchingList = async () => {
+    const response = await axios.get("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/matching");
+    setMatchingList(response.data.matchingList);
+    console.log("response: ", response.data.matchingList);
+    console.log("matchingList: ", matchingList);
+  };
+
+  useEffect(() => {
+    fetchMatchingList();
+  }, []);
+
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
+
+  // const fetchMatchingList = async () => {
+  //   try {
+  //     // 요청이 시작 할 때에는 error 와 MatchingList 를 초기화하고
+  //     setError(null);
+  //     setMatchingList([]);
+  //     // loading 상태를 true 로 바꿉니다.
+  //     setLoading(true);
+  //     const response = await axios.get("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/matching");
+  //     setMatchingList(response.data.matchingList);
+  //     console.log(response, matchingList);
+  //   } catch (e) {
+  //     setError(e);
+  //     console.log(e);
+  //   }
+  //   setLoading(false);
+  // };
+
+  // useEffect(() => {
+  //   fetchMatchingList();
+  // }, []);
 
   // 검색창 관리
   const [searchText, setSearchText] = useState("");
@@ -108,19 +314,6 @@ function MainPage() {
           >
             Reset
           </Button>
-          {/* <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              confirm({
-                closeDropdown: false,
-              });
-              setSearchText(selectedKeys[0]);
-              setSearchedColumn(dataIndex);
-            }}
-          >
-            Filter
-          </Button> */}
         </Space>
       </div>
     ),
@@ -159,7 +352,6 @@ function MainPage() {
       title: "맛집",
       dataIndex: "name",
       key: "name",
-      // render: (text) => <a>{text}</a>,
       ...getColumnSearchProps("name"),
       width: "200px",
       align: "center",
@@ -173,22 +365,10 @@ function MainPage() {
       width: "150px",
       align: "center",
     },
-    // {
-    //   title: "최대 인원",
-    //   dataIndex: "max",
-    //   key: "max",
-    //   sorter: (a, b) => a.max - b.max,
-    //   sortDirections: ["descend", "ascend"],
-    //   width: "130px",
-    //   align: "center",
-    // },
     {
       title: "매칭 조건",
       key: "tags",
       dataIndex: "tags",
-      // key: "matchings",
-      // dataIndex: "matchings",
-
       filters: [
         {
           text: "성별",
@@ -280,25 +460,10 @@ function MainPage() {
         </>
       ),
     },
-    // {
-    //   title: "시간",
-    //   dataIndex: "date",
-    //   key: "date",
-    //   // render: (time) => <>{time.format("YYYY-MM-DD hh:mm")}</>,
-    //   // sorter: (a, b) => a.date - b.date,
-    //   // sortDirections: ["descend", "ascend"],
-    //   width: "250px",
-    //   align: "center",
-    // },
     {
       title: "매칭 신청",
       key: "action",
       render: (data) => (
-        // <Space size="middle">
-        // <Link to="/detail">신청하기😋</Link>
-        // <Button type="primary" onClick={showModal}>
-        //   신청하기😋
-        // </Button>
         <Space>
           <Button onClick={() => showModal(data)}>신청하기😋</Button>
         </Space>
@@ -308,9 +473,9 @@ function MainPage() {
     },
   ];
 
+  // 맛칭 데이터
   const data = [
     {
-      key: "1",
       name: "우뇽파스타",
       waiting: 2,
       matchings: [
@@ -337,7 +502,6 @@ function MainPage() {
       ],
     },
     {
-      key: "2",
       name: "북촌순두부",
       waiting: 1,
       matchings: [
@@ -354,7 +518,6 @@ function MainPage() {
       ],
     },
     {
-      key: "3",
       name: "카우버거",
       waiting: 5,
       matchings: [
@@ -410,73 +573,247 @@ function MainPage() {
         },
       ],
     },
-    // {
-    //   key: "4",
-    //   name: "라이스&포테이토",
-    //   waiting: 1,
-    //   matchings: [
-    //     {
-    //       tags: ["성별 무관", "산업보안학과", "우리 친해져요"],
-    //       date: "2022-07-30 15:00",
-    //       description: "근본 밥약 장소.. 랄까?",
-    //       max: 2,
-    //       id: 9,
-    //       follower: ["밈갬", "영갬", "오구"],
-    //     },
-    //   ],
-    // },
-    // {
-    //   key: "5",
-    //   name: "장독대",
-    //   waiting: 1,
-    //   matchings: [
-    //     {
-    //       tags: ["성별 무관", "국제물류학과", "우리 친해져요"],
-    //       date: "2022-07-30 16:00",
-    //       description: "꿀막걸리 먹을 사람 구해요",
-    //       max: 2,
-    //       id: 10,
-    //       follower: ["밈갬", "영갬", "오구"],
-    //     },
-    //   ],
-    // },
-    // {
-    //   key: "6",
-    //   name: "인근주민",
-    //   waiting: 1,
-    //   matchings: [
-    //     {
-    //       tags: ["여성", "모든 학과", "우리 친해져요"],
-    //       date: "2022-08-19 16:00",
-    //       description: "간술~",
-    //       max: 2,
-    //       id: 11,
-    //       follower: ["밈갬", "영갬", "오구"],
-    //     },
-    //   ],
-    // },
-    // {
-    //   key: "7",
-    //   name: "엉터리생고기",
-    //   waiting: 1,
-    //   matchings: [
-    //     {
-    //       tags: ["남성", "기계공학과", "우리 친해져요"],
-    //       date: "2022-08-11 16:00",
-    //       description: "과제메이트 겸 고기메이트 찾습니다",
-    //       max: 2,
-    //       id: 12,
-    //       follower: ["밈갬", "영갬", "오구"],
-    //     },
-    //   ],
-    // },
     {
-      key: "8",
+      name: "라이스&포테이토",
+      waiting: 1,
+      matchings: [
+        {
+          tags: ["성별 무관", "산업보안학과", "우리 친해져요"],
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
+          description: "친구를 사귀고 싶어요ㅠㅠ",
+          max: 3,
+          id: 9,
+          follower: ["밈갬"],
+        },
+      ],
+    },
+    {
+      name: "장독대",
+      waiting: 1,
+      matchings: [
+        {
+          tags: ["성별 무관", "국제물류학과", "우리 친해져요"],
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
+          description: "친구를 사귀고 싶어요ㅠㅠ",
+          max: 3,
+          id: 10,
+          follower: ["밈갬"],
+        },
+      ],
+    },
+    {
+      name: "인근주민",
+      waiting: 1,
+      matchings: [
+        {
+          tags: ["여성", "모든 학과", "우리 친해져요"],
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
+          description: "친구를 사귀고 싶어요ㅠㅠ",
+          max: 3,
+          id: 11,
+          follower: ["밈갬"],
+        },
+      ],
+    },
+    {
+      name: "엉터리생고기",
+      waiting: 1,
+      matchings: [
+        {
+          tags: ["남성", "기계공학과", "우리 친해져요"],
+          startTime: "2022-08-10 16:00",
+          endTime: "2022-08-10 18:00",
+          duration: "2시간",
+          description: "친구를 사귀고 싶어요ㅠㅠ",
+          max: 3,
+          id: 12,
+          follower: ["밈갬"],
+        },
+      ],
+    },
+    {
       name: "중대양곱창",
       waiting: 0,
       matchings: [{ id: 0 }],
     },
   ];
+
+  // 맛칭 데이터 postman test
+  //   const test = [
+  //     {
+  //       "name": "우뇽파스타",
+  //       "waiting": 2,
+  //       "matchings": [
+  //         {
+  //           "tags": ["여성", "산업보안학과", "우리 친해져요"],
+  //           "startTime": "2022-08-10 16:00",
+  //           "endTime": "2022-08-10 18:00",
+  //           "duration": "2시간",
+  //           "description": "여기 맛있어요!",
+  //           "max": 5,
+  //           "id": 1,
+  //           "follower": ["밈갬", "영갬", "오구"]
+  //         },
+  //         {
+  //           "tags": ["여성", "산업보안학과", "밥만 먹어요"],
+  //           "startTime": "2022-08-10 16:00",
+  //           "endTime": "2022-08-10 18:00",
+  //           "duration": "2시간",
+  //           "description": "같이 가요~",
+  //           "max": 3,
+  //           "id": 2,
+  //           "follower": ["밈갬", "영갬"],
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       "name": "북촌순두부",
+  //       "waiting": 1,
+  //       "matchings": [
+  //         {
+  //           "tags": ["남성", "경영학과", "밥만 먹어요"],
+  //           "startTime": "2022-08-10 15:00",
+  //           "endTime": "2022-08-10 18:00",
+  //           "duration": "3시간",
+  //           "description": "햄치즈 순두부 맛집",
+  //           "max": 4,
+  //           "id": 3,
+  //           "follower": ["밈", "영", "구"],
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       "name": "카우버거",
+  //       "waiting": 5,
+  //       "matchings": [
+  //         {
+  //           "tags": ["성별 무관", "소프트웨어학과", "우리 친해져요"],
+  //           "startTime": "2022-08-10 16:00",
+  //           "endTime": "2022-08-10 18:00",
+  //           "duration": "2시간",
+  //           "description": "친구를 사귀고 싶어요ㅠㅠ",
+  //           "max": 3,
+  //           "id": 4,
+  //           "follower": ["밈갬"],
+  //         },
+  //         {
+  //           "tags": ["여성", "모든 학과", "우리 친해져요"],
+  //           "startTime": "2022-08-10 16:00",
+  //           "endTime": "2022-08-10 18:00",
+  //           "duration": "2시간",
+  //           "description": "",
+  //           "max": 2,
+  //           "id": 5,
+  //           "follower": [],
+  //         },
+  //         {
+  //           "tags": ["남성", "소프트웨어학과", "밥만 먹어요"],
+  //           "startTime": "2022-08-10 16:00",
+  //           "endTime": "2022-08-10 18:00",
+  //           "duration": "2시간",
+  //           "description": "배고파요",
+  //           "max": 3,
+  //           "id": 6,
+  //           "follower": ["밈갬"]
+  //         },
+  //         {
+  //           "tags": ["성별 무관", "소프트웨어학과", "우리 친해져요"],
+  //           "startTime": "2022-08-10 16:00",
+  //           "endTime": "2022-08-10 18:00",
+  //           "duration": "2시간",
+  //           "description": "카벅",
+  //           "max": 2,
+  //           "id": 7,
+  //           "follower": []
+  //         },
+  //         {
+  //           "tags": ["성별 무관", "소프트웨어학과", "우리 친해져요"],
+  //           "startTime": "2022-08-10 16:00",
+  //           "endTime": "2022-08-10 18:00",
+  //           "duration": "2시간",
+  //           "description": "친구를 사귀고 싶어요ㅠㅠ",
+  //           "max": 3,
+  //           "id": 8,
+  //           "follower": ["밈갬"]
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       "name": "라이스&포테이토",
+  //       "waiting": 1,
+  //       "matchings": [
+  //         {
+  //           "tags": ["성별 무관", "산업보안학과", "우리 친해져요"],
+  //           "startTime": "2022-08-10 16:00",
+  //           "endTime": "2022-08-10 18:00",
+  //           "duration": "2시간",
+  //           "description": "친구를 사귀고 싶어요ㅠㅠ",
+  //           "max": 3,
+  //           "id": 9,
+  //           "follower": ["밈갬"]
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       "name": "장독대",
+  //       "waiting": 1,
+  //       "matchings": [
+  //         {
+  //           "tags": ["성별 무관", "국제물류학과", "우리 친해져요"],
+  //           "startTime": "2022-08-10 16:00",
+  //           "endTime": "2022-08-10 18:00",
+  //           "duration": "2시간",
+  //           "description": "친구를 사귀고 싶어요ㅠㅠ",
+  //           "max": 3,
+  //           "id": 10,
+  //           "follower": ["밈갬"],
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       "name": "인근주민",
+  //       "waiting": 1,
+  //       "matchings": [
+  //         {
+  //           "tags": ["여성", "모든 학과", "우리 친해져요"],
+  //           "startTime": "2022-08-10 16:00",
+  //           "endTime": "2022-08-10 18:00",
+  //           "duration": "2시간",
+  //           "description": "친구를 사귀고 싶어요ㅠㅠ",
+  //           "max": 3,
+  //           "id": 11,
+  //           "follower": ["밈갬"]
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       "name": "엉터리생고기",
+  //       "waiting": 1,
+  //       "matchings": [
+  //         {
+  //           "tags": ["남성", "기계공학과", "우리 친해져요"],
+  //           "startTime": "2022-08-10 16:00",
+  //           "endTime": "2022-08-10 18:00",
+  //           "duration": "2시간",
+  //           "description": "친구를 사귀고 싶어요ㅠㅠ",
+  //           "max": 3,
+  //           "id": 12,
+  //           "follower": ["밈갬"]
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       "name": "중대양곱창",
+  //       "waiting": 0,
+  //       "matchings": [{ "id": 0 }]
+  //     }
+  // ]
 
   data.forEach((data) => {
     if (data.waiting === 0) data.tags = [];
@@ -491,6 +828,9 @@ function MainPage() {
       ];
     }
   });
+
+  // if (loading) return <div>로딩중..</div>;
+  // if (error) return <div>에러가 발생했습니다</div>;
 
   return (
     <div className={styles.container}>
@@ -509,6 +849,11 @@ function MainPage() {
         <span>w</span>
         <span>!</span>
       </h1>
+      {/* <div>
+        {matchingList.map((m) => (
+          <>{m.name}</>
+        ))}
+      </div> */}
       <div className={styles.table_container}>
         <Table scroll={{ y: "65vh" }} pagination={false} columns={columns} dataSource={data} className={styles.table} />
       </div>
