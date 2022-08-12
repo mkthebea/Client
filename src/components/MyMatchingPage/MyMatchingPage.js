@@ -11,25 +11,25 @@ function MyMatchingPage() {
   const data = [
     {
       name: "우뇽파스타",
-      date: "2022-08-01 16:00",
+      date: "2022-08-13 13:00",
       id: 1,
       follower: ["밈갬", "영갬", "오구"],
     },
     {
       name: "중대양곱창",
-      date: "2022-08-04 00:30",
+      date: "2022-08-12 21:00",
       id: 2,
       follower: ["밈갬", "영갬", "오구"],
     },
     {
       name: "피맥하우스",
-      date: "2022-08-4 00:50",
+      date: "2022-08-04 11:50",
       id: 3,
       follower: ["밈갬", "영갬", "오구"],
     },
     {
       name: "북촌순두부",
-      date: "2023-08-1 16:00",
+      date: "2022-08-01 16:00",
       id: 4,
       follower: ["밈갬", "영갬", "오구"],
     },
@@ -56,7 +56,7 @@ function MyMatchingPage() {
         remain += diffMin + "분 ";
       }
       remain += "남음";
-      if (diffDay == 0 && diffHour == 0 && diffMin <= 30) {
+      if (diffDay == 0 && diffHour == 0 && diffMin <= 59) {
         item["status"] = "coming";
       } else {
         item["status"] = "";
@@ -117,7 +117,7 @@ function MyMatchingPage() {
   return (
     <div className={styles.container}>
       <div className={styles.form_container}>
-        <div className={styles.text}>My MatChing</div>
+        <div className={styles.text}>내 맛칭</div>
         <List
           grid={{
             gutter: 16,

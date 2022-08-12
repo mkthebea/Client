@@ -31,7 +31,7 @@ function NewMatchingPage() {
   return (
     <div className={styles.container}>
       <div className={styles.form_container}>
-        <div className={styles.text}>New MatChing</div>
+        <div className={styles.text}>새 맛칭</div>
         <Form
           labelCol={{
             span: 5,
@@ -54,6 +54,12 @@ function NewMatchingPage() {
           </Form.Item>
           <Form.Item label="학과" name={["tags", "major"]} rules={[{ required: true, message: "학과를 선택하세요" }]}>
             <Select>
+              <Select.Option value="bi">경영학과</Select.Option>
+              <Select.Option value="ec">경제학과</Select.Option>
+              <Select.Option value="ad">광고홍보학과</Select.Option>
+              <Select.Option value="ma">기계공학과</Select.Option>
+              <Select.Option value="gm">국제물류학과</Select.Option>
+              <Select.Option value="st">응용통계학과</Select.Option>
               <Select.Option value="is">산업보안학과</Select.Option>
               <Select.Option value="sw">소프트웨어학과</Select.Option>
               <Select.Option value="all">학과 무관</Select.Option>

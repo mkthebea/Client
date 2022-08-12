@@ -33,7 +33,7 @@ const App = () => {
             </Menu.Item>
             <Menu.Item key="mymatching" icon={<ClockCircleOutlined />}>
               <Link to="/mymatching" className={styles.menu_link}>
-                내 매칭
+                내 맛칭
               </Link>
             </Menu.Item>
             <Menu.Item key="register" icon={<PlusCircleOutlined />}>

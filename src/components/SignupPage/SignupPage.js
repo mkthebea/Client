@@ -72,6 +72,7 @@ function SignupPage() {
         ) : (
           <>
             <Alert message="실제와 다른 정보로 활동할 경우 계정이 영구 정지됩니다." banner closable className={styles.banner} />
+            <Alert message="지금 입력하는 정보는 수정이 불가능합니다. 신중히 입력하세요." banner closable className={styles.banner} />
 
             <Form
               className={styles.form}
@@ -153,6 +154,12 @@ function SignupPage() {
                 ]}
               >
                 <Select>
+                  <Select.Option value="bi">경영학과</Select.Option>
+                  <Select.Option value="ec">경제학과</Select.Option>
+                  <Select.Option value="ad">광고홍보학과</Select.Option>
+                  <Select.Option value="ma">기계공학과</Select.Option>
+                  <Select.Option value="gm">국제물류학과</Select.Option>
+                  <Select.Option value="st">응용통계학과</Select.Option>
                   <Select.Option value="is">산업보안학과</Select.Option>
                   <Select.Option value="sw">소프트웨어학과</Select.Option>
                   <Select.Option value="etc">기타</Select.Option>
