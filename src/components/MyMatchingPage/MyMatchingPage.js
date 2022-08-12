@@ -29,7 +29,7 @@ function MyMatchingPage() {
     },
     {
       name: "북촌순두부",
-      date: "2022-08-1 16:00",
+      date: "2023-08-1 16:00",
       id: 4,
       follower: ["밈갬", "영갬", "오구"],
     },

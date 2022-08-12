@@ -31,7 +31,7 @@ function LoginPage() {
   return (
     <div className={styles.container}>
       <div className={styles.form_container}>
-        <div className={styles.text}>Login</div>
+        <div className={styles.text}>로그인</div>
         <Form
           className={styles.form}
           name="basic"

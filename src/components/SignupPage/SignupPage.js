@@ -25,8 +25,8 @@ function SignupPage() {
     await axios.post("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/account/signup/", accountData).then((response) => {
       if (response.data.success) {
         setSignUp(response.data.success);
-        // console.log("account 응답: ", response);
-        // console.log("account 전송 데이터: ", accountData);
+        console.log("account 응답: ", response);
+        console.log("account 전송 데이터: ", accountData);
 
         //account_id
         profileData["accountId"] = response.data.accountId;

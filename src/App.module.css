@@ -112,3 +112,18 @@
   color: rgb(110,165,254);
 }
 
+.menu_link {
+  color: white;
+}
+.menu_link:visited {
+  color: white;
+}
+.menu_link:hover {
+  color: rgb(0,157,255);
+}
+.menu_link:active {
+  color: rgb(0,157,255);
+}
+.menu_link:focus {
+  color: rgb(0,157,255);
+}

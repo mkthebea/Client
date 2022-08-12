@@ -27,13 +27,19 @@ const App = () => {
           </Link>
           <Menu theme="light" mode="inline" defaultSelectedKeys={["1"]} style={{ backgroundColor: "rgb(110,165,254)", color: "white" }}>
             <Menu.Item key="login" icon={<LoginOutlined />}>
-              <Link to="/login">로그인</Link>
+              <Link to="/login" className={styles.menu_link}>
+                로그인
+              </Link>
             </Menu.Item>
             <Menu.Item key="mymatching" icon={<ClockCircleOutlined />}>
-              <Link to="/mymatching">내 매칭</Link>
+              <Link to="/mymatching" className={styles.menu_link}>
+                내 매칭
+              </Link>
             </Menu.Item>
             <Menu.Item key="register" icon={<PlusCircleOutlined />}>
-              <Link to="/register">맛집 등록</Link>
+              <Link to="/register" className={styles.menu_link}>
+                맛집 등록
+              </Link>
             </Menu.Item>
           </Menu>
         </Sider>

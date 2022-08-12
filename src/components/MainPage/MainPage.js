@@ -835,7 +835,7 @@ function MainPage() {
   return (
     <div className={styles.container}>
       <h1>
-        <span>M</span>
+        {/* <span>M</span>
         <span>a</span>
         <span>t</span>
         <span>C</span>
@@ -847,6 +847,14 @@ function MainPage() {
         <span>N</span>
         <span>o</span>
         <span>w</span>
+        <span>!</span> */}
+        <span>대</span>
+        <span>기</span>
+        <span>중</span>
+        <span>인</span>
+        <span>&nbsp;</span>
+        <span>맛</span>
+        <span>칭</span>
         <span>!</span>
       </h1>
       {/* <div>
