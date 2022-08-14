@@ -22,7 +22,7 @@ function NewMatchingPage() {
     // console.log("send data: ", data);
     // console.log("response: ", response);
     if (response.data.success) {
-      console.log("Success:", data);
+      console.log("Success:");
       message.success("등록 완료!");
     } else {
       message.error("에러 발생, 다시 시도하세요.");

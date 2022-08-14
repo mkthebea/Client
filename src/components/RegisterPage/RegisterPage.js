@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Button, Checkbox, Form, Input, message, Popconfirm, Modal, Alert } from "antd";
+import { Button, Checkbox, Form, Input, message, Alert } from "antd";
 import styles from "./RegisterPage.module.css";
-import DaumPostcode from "react-daum-postcode";
+import axios from "axios";
 
 function RegisterPage() {
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     values["name"] = values["name"].split(" ").join(""); //문자열 공백 제거
-    const success = true;
-    if (success) {
-      console.log("Success:", values);
+    const response = await axios.post("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/matzip/create-matzip/", values);
+    // console.log("send data: ", values);
+    // console.log("response: ", response);
+    if (response.data.success) {
+      console.log("Success");
       message.success("식당 등록 성공!");
     } else {
-      message.error("이미 리스트에 등록된 식당입니다. 맛칭 리스트를 확인하세요.");
+      // message.error("이미 리스트에 등록된 식당입니다. 맛칭 리스트를 확인하세요.");
+      message.error(response.data.errorMessage);
     }
   };
 
