@@ -7,25 +7,29 @@ function NewMatchingPage() {
   const { TextArea } = Input;
 
   const onFinish = async (values) => {
-    let data = values;
-    // const date = data["date"].format("YYYY-MM-DD");
-    // const startTime = data["startTime"].format("HH:MM");
-    // const endTime = data["time"][1].format("HH:MM");
-
-    // data[date] = date + " " + startTime + " ~ " + endTime;
-
-    data["date"] = data["date"].format("YYYY-MM-DD");
-    data["startTime"] = data["startTime"].format("HH:MM");
-
-    // 매칭 등록 요청 보내기
-    const response = await axios.post("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/matching/create-matching/5", data);
-    // console.log("send data: ", data);
-    // console.log("response: ", response);
-    if (response.data.success) {
-      console.log("Success:");
-      message.success("등록 완료!");
+    if (values.max <= values.min) {
+      message.error("최대 인원 수는 최소 인원 수보다 커야 합니다.");
     } else {
-      message.error("에러 발생, 다시 시도하세요.");
+      let data = values;
+      // const date = data["date"].format("YYYY-MM-DD");
+      // const startTime = data["startTime"].format("HH:MM");
+      // const endTime = data["time"][1].format("HH:MM");
+
+      // data[date] = date + " " + startTime + " ~ " + endTime;
+
+      data["date"] = data["date"].format("YYYY-MM-DD");
+      data["startTime"] = data["startTime"].format("HH:MM");
+
+      // 매칭 등록 요청 보내기
+      const response = await axios.post("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/matching/create-matching/5", data);
+      // console.log("send data: ", data);
+      // console.log("response: ", response);
+      if (response.data.success) {
+        console.log("Success:", data);
+        message.success("등록 완료!");
+      } else {
+        message.error("에러 발생, 다시 시도하세요.");
+      }
     }
 
     // window.location.replace("/");
