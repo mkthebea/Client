@@ -1,42 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./MyMatchingPage.module.css";
 import { Button, Card, List, Modal, Select, Checkbox, Input, Form, message } from "antd";
 
 import moment from "moment";
+import axios from "axios";
 
 function MyMatchingPage() {
   const { Option } = Select;
   const { TextArea } = Input;
 
-  const data = [
-    {
-      name: "우뇽파스타",
-      date: "2022-08-13 13:00",
-      id: 1,
-      follower: ["밈갬", "영갬", "오구"],
-    },
-    {
-      name: "중대양곱창",
-      date: "2022-08-12 21:00",
-      id: 2,
-      follower: ["밈갬", "영갬", "오구"],
-    },
-    {
-      name: "피맥하우스",
-      date: "2022-08-04 11:50",
-      id: 3,
-      follower: ["밈갬", "영갬", "오구"],
-    },
-    {
-      name: "북촌순두부",
-      date: "2022-08-01 16:00",
-      id: 4,
-      follower: ["밈갬", "영갬", "오구"],
-    },
-  ];
+  const [userMatchingList, setUserMatchingList] = useState([]);
+
+  const fetchUserMatchingList = async () => {
+    const response = await axios.get("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/matching/user-matching");
+    setUserMatchingList(response.data.userMatching);
+    // console.log("response: ", response);
+  };
+
+  useEffect(() => {
+    fetchUserMatchingList();
+  }, []);
+
+  // const data = [
+  //   {
+  //     name: "우뇽파스타",
+  //     date: "2022-08-13 13:00",
+  //     id: 1,
+  //     follower: ["밈갬", "영갬", "오구"],
+  //   },
+  //   {
+  //     name: "중대양곱창",
+  //     date: "2022-08-12 21:00",
+  //     id: 2,
+  //     follower: ["밈갬", "영갬", "오구"],
+  //   },
+  //   {
+  //     name: "피맥하우스",
+  //     date: "2022-08-04 11:50",
+  //     id: 3,
+  //     follower: ["밈갬", "영갬", "오구"],
+  //   },
+  //   {
+  //     name: "북촌순두부",
+  //     date: "2022-08-01 16:00",
+  //     id: 4,
+  //     follower: ["밈갬", "영갬", "오구"],
+  //   },
+  // ];
   const nowTime = new Date();
 
-  data.forEach((item) => {
+  // 남은 시간 계산
+  userMatchingList.forEach((item) => {
     const diff = new Date(item.date) - nowTime;
     let remain = "";
     if (diff <= 0) {
@@ -67,13 +81,23 @@ function MyMatchingPage() {
     item["remain"] = remain;
   });
 
-  const onCancel = (id) => {
-    console.log("cancel: ", id);
+  const onCancel = async (id) => {
+    const response = await axios.delete("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/matching/user-matching/cancel", { id: id });
+    // console.log("delete send data: ", { id: id });
+    // console.log("delete response: ", response);
+    if (response.data.success) {
+      message.success("취소 완료");
+      console.log("cancel: ", id);
+      fetchUserMatchingList(); // 취소 후 내 매칭 리스트 리로드
+    } else {
+      message.error("취소 요청 실패");
+    }
   };
+
   const onReport = (id, follower) => {
     setIsModalVisible(true);
     setModalData(follower);
-    console.log("report: ", id);
+    // console.log("report: ", id);
   };
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -96,22 +120,25 @@ function MyMatchingPage() {
     console.log(`checked = ${e.target.value}`);
   };
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log("Success:", values);
     // 신고 요청 보내기
-    const res = true;
-    if (res) {
+    const response = await axios.post("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/matching/report-matching", values);
+    // console.log("report send data: ", values);
+    // console.log("report response: ", response);
+    // const res = true;
+    if (response.data.success) {
       message.success("신고 완료");
       setTimeout(() => {
         setIsModalVisible(false);
       }, 1000);
     } else {
-      message.error("에러 발생: 잠시 후 다시 시도하세요.");
+      message.error("신고 요청 실패");
     }
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    console.log("에러 발생: ", errorInfo);
   };
 
   return (
@@ -123,7 +150,7 @@ function MyMatchingPage() {
             gutter: 16,
             column: 3,
           }}
-          dataSource={data}
+          dataSource={userMatchingList}
           renderItem={(item) => (
             <List.Item>
               <Card title={item.name} hoverable="true" headStyle={{ fontSize: "18px" }}>
