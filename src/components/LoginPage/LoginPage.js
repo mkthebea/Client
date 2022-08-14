@@ -60,7 +60,7 @@ function LoginPage() {
             <Input addonAfter="@cau.ac.kr" />
           </Form.Item>
 
-          <Form.Item label="비밀번호" name="password" rules={[{ required: true, message: "Please input your password!" }]}>
+          <Form.Item label="비밀번호" name="password" rules={[{ required: true, message: "비밀번호를 입력하세요." }]}>
             <Input.Password />
           </Form.Item>
 
@@ -70,7 +70,7 @@ function LoginPage() {
 
           <Form.Item wrapperCol={{ offset: 4, span: 16 }}>
             <Button type="primary" htmlType="submit">
-              Submit
+              로그인
             </Button>
             <span style={{ marginLeft: "50px" }}>No Account? </span>
             <Link to="/signup">
