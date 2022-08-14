@@ -34,12 +34,27 @@ function MainPage() {
     setIsModalVisible(true);
   };
 
-  const handleOk = () => {
+  // const joinMatching = async () => {
+  //   const response = await axios.post("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/matching/10/follower", { id: Id });
+  //   console.log("send data: ", { id: Id });
+  //   console.log("response: ", response, "response.data.success: ", response.data.success);
+  //   const isSuccess = response.data.success;
+  //   // if (response.data.success) return true;
+  //   // else return false;
+  //   return isSuccess;
+  // };
+
+  const handleOk = async () => {
     console.log("매칭 신청: ", { id: Id });
     console.log(matchingList);
     // 매칭 신청 요청 보내기
-    const res = true;
-    if (res) {
+    // const res = joinMatching();
+    const response = await axios.post("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/matching/10/follower", { id: Id });
+    // console.log("send data: ", { id: Id });
+    // console.log("response: ", response, "response.data.success: ", response.data.success);
+    // const isSuccess = response.data.success;
+    // console.log(response.data.success);
+    if (response.data.success) {
       message.success("신청 완료!");
       setTimeout(() => {
         setIsModalVisible(false);
