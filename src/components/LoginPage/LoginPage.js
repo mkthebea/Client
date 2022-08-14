@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { Button, Checkbox, Form, Input, message } from "antd";
 import styles from "./LoginPage.module.css";
+import axios from "axios";
 
 function LoginPage() {
   // const [login, setLogin] = useState(false);
@@ -11,12 +12,16 @@ function LoginPage() {
   //   console.log("로그인 상태: ", login);
   // };
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     // 로그인 성공시 메인 페이지로 이동
-    const login = true; //로그인 요청 응답
-    console.log("Success:", values);
-    if (login) {
-      window.location.replace("/");
+    const response = await axios.post("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/account/login/", values);
+    console.log("send data: ", values);
+    console.log("response: ", response);
+    if (response.data.success) {
+      message.success("로그인 성공");
+      setTimeout(() => {
+        window.location.replace("/");
+      }, 1000);
     } else {
       message.error("로그인 실패");
     }
