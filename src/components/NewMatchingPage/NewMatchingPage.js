@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Button, TimePicker, DatePicker, Form, Input, InputNumber, Select, message } from "antd";
 import styles from "./NewMatchingPage.module.css";
+import axios from "axios";
 
 function NewMatchingPage() {
   const { TextArea } = Input;
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     let data = values;
     // const date = data["date"].format("YYYY-MM-DD");
     // const startTime = data["startTime"].format("HH:MM");
@@ -17,8 +18,10 @@ function NewMatchingPage() {
     data["startTime"] = data["startTime"].format("HH:MM");
 
     // 매칭 등록 요청 보내기
-    const res = true; // Success
-    if (res) {
+    const response = await axios.post("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/matching/create-matching/5", data);
+    // console.log("send data: ", data);
+    // console.log("response: ", response);
+    if (response.data.success) {
       console.log("Success:", data);
       message.success("등록 완료!");
     } else {
