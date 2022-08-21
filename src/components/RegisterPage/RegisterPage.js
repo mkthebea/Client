@@ -10,7 +10,7 @@ function RegisterPage() {
     // console.log("send data: ", values);
     // console.log("response: ", response);
     if (response.data.success) {
-      console.log("Success");
+      // console.log("Success");
       message.success("식당 등록 성공!");
     } else {
       // message.error("이미 리스트에 등록된 식당입니다. 맛칭 리스트를 확인하세요.");

@@ -17,15 +17,15 @@ import Logo from "./Logo.jpg";
 const { Header, Content, Footer, Sider } = Layout;
 
 const App = () => {
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
   return (
     <Router>
-      <Layout>
+      <Layout className={styles.font}>
         <Sider trigger={null} collapsible collapsed={collapsed} theme="light" style={{ backgroundColor: "rgb(110,165,254)" }}>
           <Link to="/">
             <img src={Logo} className={styles.logo} />
           </Link>
-          <Menu theme="light" mode="inline" defaultSelectedKeys={["1"]} style={{ backgroundColor: "rgb(110,165,254)", color: "white" }}>
+          <Menu theme="light" mode="inline" defaultSelectedKeys={["1"]} style={{ backgroundColor: "rgb(110,165,254)", color: "white", fontSize: "20px" }}>
             <Menu.Item key="login" icon={<LoginOutlined />}>
               <Link to="/login" className={styles.menu_link}>
                 로그인

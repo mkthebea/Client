@@ -12,7 +12,7 @@ function SignupPage() {
   const fetchNicknameList = async () => {
     const response = await axios.get("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/profile/nickname/");
     setNicknameList(response.data.nicknameList);
-    console.log(response.data.nicknameList, nicknameList);
+    // console.log(response.data.nicknameList, nicknameList);
   };
   useEffect(() => {
     fetchNicknameList();

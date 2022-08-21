@@ -727,6 +727,7 @@ function MainPage() {
         onCancel={handleCancel}
         centered="true"
         width="80%"
+        className={styles.modal}
       >
         <DetailPage data={modalData} setId={setId} setButtonDisabled={setButtonDisabled} />
       </Modal>

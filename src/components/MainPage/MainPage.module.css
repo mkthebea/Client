@@ -2,13 +2,13 @@
   height: 100%;
   width: 100%;
   text-align: center;
+  font-family: 'SDSamliphopangche_Basic', sans-serif;
 }
 
-.title {
-    font-size: 30px;
+/* .title {
     text-align: center;
     color: white;
-}
+} */
 
 .table_container{
     display: flex;
@@ -20,11 +20,28 @@
     min-height: 80vh;
     width: 100%;
     text-align: center;
+    font-size: 20px;
     /* background-color: white; */
+}
+
+.table th {
+  font-size: 18px;
+}
+.table td {
+  font-size: 18px;
+}
+
+.table td span {
+  font-size: 15px;
+}
+
+.modal {
+  font-family: 'SDSamliphopangche_Basic', sans-serif;
 }
 
 h1 {
     height: 60px;
+    font-family: 'SDSamliphopangche_Outline', sans-serif;
   }
   
   h1 span {

@@ -199,7 +199,7 @@ function MyMatchingPage() {
             </List.Item>
           )}
         />
-        <Modal title="신고하기" centered visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null} width="60%">
+        <Modal title="신고하기" centered visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null} width="60%" className={styles.modal}>
           <Form
             className={styles.form}
             name="basic"
