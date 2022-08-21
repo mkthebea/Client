@@ -81,8 +81,9 @@
 }
 
 .logo {
-  width: 100%;
-  text-align: center;
+  width: 90%;
+  display: block;
+  margin: 20px auto;
 }
 .header {
   background: #fff;
@@ -133,7 +134,7 @@
   color: rgb(110,165,254);
 }
 
-.menu_link {
+.menu_link:link {
   color: white;
 }
 .menu_link:visited {

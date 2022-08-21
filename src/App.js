@@ -13,6 +13,7 @@ import SignupSuccessPage from "./components/SignupPage/SignupSuccessPage";
 import NewMatchingPage from "./components/NewMatchingPage/NewMatchingPage";
 import styles from "./App.module.css";
 import Logo from "./Logo.jpg";
+import newLogo from "./newLogo.png";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -22,13 +23,11 @@ const App = () => {
     <Router>
       <Layout className={styles.font}>
         <Sider trigger={null} collapsible collapsed={collapsed} theme="light" style={{ backgroundColor: "rgb(110,165,254)" }}>
-          <Link to="/">
-            <img src={Logo} className={styles.logo} />
-          </Link>
-          <Menu theme="light" mode="inline" defaultSelectedKeys={["1"]} style={{ backgroundColor: "rgb(110,165,254)", color: "white", fontSize: "20px" }}>
-            <Menu.Item key="login" icon={<LoginOutlined />}>
-              <Link to="/login" className={styles.menu_link}>
-                로그인
+          <img src={newLogo} className={styles.logo} />
+          <Menu theme="light" mode="inline" defaultSelectedKeys={["main"]} style={{ backgroundColor: "rgb(110,165,254)", color: "white", fontSize: "20px" }}>
+            <Menu.Item key="main" icon={<ClockCircleOutlined />}>
+              <Link to="/" className={styles.menu_link}>
+                메인 페이지
               </Link>
             </Menu.Item>
             <Menu.Item key="mymatching" icon={<ClockCircleOutlined />}>
@@ -39,6 +38,11 @@ const App = () => {
             <Menu.Item key="register" icon={<PlusCircleOutlined />}>
               <Link to="/register" className={styles.menu_link}>
                 맛집 등록
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="login" icon={<LoginOutlined />}>
+              <Link to="/login" className={styles.menu_link}>
+                로그인
               </Link>
             </Menu.Item>
           </Menu>
