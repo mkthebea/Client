@@ -1,4 +1,4 @@
-import { LoginOutlined, ClockCircleOutlined, PlusCircleOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import { HomeOutlined, LoginOutlined, ClockCircleOutlined, PlusCircleOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import "antd/dist/antd.min.css";
 import React, { useState, useEffect, Component } from "react";
@@ -22,28 +22,42 @@ const App = () => {
   return (
     <Router>
       <Layout className={styles.font}>
-        <Sider trigger={null} collapsible collapsed={collapsed} theme="light" style={{ backgroundColor: "rgb(110,165,254)" }}>
-          <img src={newLogo} className={styles.logo} />
+        <Sider trigger={null} collapsible collapsed={collapsed} theme="dark" style={{ backgroundColor: "rgb(110,165,254)" }}>
+          <Link to="/">
+            <img src={newLogo} className={styles.logo} />
+          </Link>
           <Menu theme="light" mode="inline" defaultSelectedKeys={["main"]} style={{ backgroundColor: "rgb(110,165,254)", color: "white", fontSize: "20px" }}>
-            <Menu.Item key="main" icon={<ClockCircleOutlined />}>
+            <Menu.Item key="main" icon={<HomeOutlined />}>
               <Link to="/" className={styles.menu_link}>
                 메인 페이지
               </Link>
+              {/* <div onClick={() => window.location.replace("/")} className={styles.menu_link}>
+                메인 페이지
+              </div> */}
             </Menu.Item>
             <Menu.Item key="mymatching" icon={<ClockCircleOutlined />}>
               <Link to="/mymatching" className={styles.menu_link}>
                 내 맛칭
               </Link>
+              {/* <div onClick={() => window.location.replace("/mymatching")} className={styles.menu_link}>
+                내 맛칭
+              </div> */}
             </Menu.Item>
             <Menu.Item key="register" icon={<PlusCircleOutlined />}>
               <Link to="/register" className={styles.menu_link}>
                 맛집 등록
               </Link>
+              {/* <div onClick={() => window.location.replace("/register")} className={styles.menu_link}>
+                맛집 등록
+              </div> */}
             </Menu.Item>
             <Menu.Item key="login" icon={<LoginOutlined />}>
               <Link to="/login" className={styles.menu_link}>
                 로그인
               </Link>
+              {/* <div onClick={() => window.location.replace("/login")} className={styles.menu_link}>
+                로그인
+              </div> */}
             </Menu.Item>
           </Menu>
         </Sider>

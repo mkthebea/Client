@@ -3,7 +3,6 @@
 .App {
   text-align: center;
 }
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -77,9 +76,8 @@
 }
 
 .font {
-  font-family: 'SDSamliphopangche_Outline', sans-serif;
+  font-family: 'SDSamliphopangche_Basic', sans-serif;
 }
-
 .logo {
   width: 90%;
   display: block;
@@ -129,23 +127,41 @@
 }
 
 .text {
-  font-family: 'SDSamliphopangche_Outline', sans-serif;
-  font-size: 20px;
+  font-family: 'SDSamliphopangche_Basic', sans-serif;
+  font-size: 25px;
+  font-weight: lighter;
   color: rgb(110,165,254);
 }
 
-.menu_link:link {
+.menu_link {
   color: white;
+  font-family: 'SDSamliphopangche_Outline', sans-serif;
 }
 .menu_link:visited {
   color: white;
 }
-.menu_link:hover {
+/* .menu_link:hover {
   color: rgb(0,157,255);
-}
-.menu_link:active {
+} */
+/* .menu_link:active {
   color: rgb(0,157,255);
-}
+} */
 .menu_link:focus {
   color: rgb(0,157,255);
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+::-webkit-scrollbar-track {
+  /* background-color: white; */
+  /* box-shadow: inset 0px 0px 15px skyblue;
+  border-radius: 30px; */
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(202,219,249);
+  background-clip: padding-box;
+  border: 4px solid transparent;
+  border-radius: 10px;
+  height: 30%;
 }
