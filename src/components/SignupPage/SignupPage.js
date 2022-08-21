@@ -10,7 +10,7 @@ function SignupPage() {
   // 닉네임 리스트 서버에 요청
   const [nicknameList, setNicknameList] = useState([]);
   const fetchNicknameList = async () => {
-    const response = await axios.get("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/profile/nickname/");
+    const response = await axios.get("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/profile/nickname/");
     setNicknameList(response.data.nicknameList);
     console.log(response.data.nicknameList, nicknameList);
   };
@@ -22,7 +22,7 @@ function SignupPage() {
     const accountData = { userEmail: values.userEmail, password: values.password };
     let profileData = { nickname: values.nickname, major: values.major, gender: values.gender };
 
-    await axios.post("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/account/signup/", accountData).then((response) => {
+    await axios.post("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/account/signup/", accountData).then((response) => {
       if (response.data.success) {
         setSignUp(response.data.success);
         console.log("account 응답: ", response);
@@ -30,7 +30,7 @@ function SignupPage() {
 
         //account_id
         profileData["accountId"] = response.data.accountId;
-        axios.post("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/profile/", profileData).then((response2) => {
+        axios.post("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/profile/", profileData).then((response2) => {
           // console.log("profile 응답: ", response2);
           // console.log("profile 전송 데이터: ", profileData);
         });

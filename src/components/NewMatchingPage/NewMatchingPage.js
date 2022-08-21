@@ -21,7 +21,7 @@ function NewMatchingPage() {
       data["startTime"] = data["startTime"].format("HH:MM");
 
       // 매칭 등록 요청 보내기
-      const response = await axios.post("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/matching/create-matching/5", data);
+      const response = await axios.post("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/matching/create-matching/", data);
       // console.log("send data: ", data);
       // console.log("response: ", response);
       if (response.data.success) {

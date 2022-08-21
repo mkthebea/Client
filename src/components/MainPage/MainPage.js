@@ -49,7 +49,7 @@ function MainPage() {
     console.log(matchingList);
     // 매칭 신청 요청 보내기
     // const res = joinMatching();
-    const response = await axios.post("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/matching/10/follower", { id: Id });
+    const response = await axios.post("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/matching/join/", { id: Id });
     // console.log("send data: ", { id: Id });
     // console.log("response: ", response, "response.data.success: ", response.data.success);
     // const isSuccess = response.data.success;
@@ -71,7 +71,7 @@ function MainPage() {
   const [matchingList, setMatchingList] = useState([]);
 
   const fetchMatchingList = async () => {
-    const response = await axios.get("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/matching");
+    const response = await axios.get("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/matching/");
     setMatchingList(response.data.matchingList);
     // console.log("response: ", response.data.matchingList);
     // console.log("matchingList: ", matchingList);

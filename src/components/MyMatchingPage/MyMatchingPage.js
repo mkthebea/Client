@@ -12,7 +12,7 @@ function MyMatchingPage() {
   const [userMatchingList, setUserMatchingList] = useState([]);
 
   const fetchUserMatchingList = async () => {
-    const response = await axios.get("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/matching/user-matching");
+    const response = await axios.get("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/matching/user-matching/");
     setUserMatchingList(response.data.userMatching);
     // console.log("response: ", response);
   };
@@ -82,7 +82,7 @@ function MyMatchingPage() {
   });
 
   const onCancel = async (id) => {
-    const response = await axios.delete("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/matching/user-matching/cancel", { id: id });
+    const response = await axios.delete("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/matching/cancel/", { id: id });
     // console.log("delete send data: ", { id: id });
     // console.log("delete response: ", response);
     if (response.data.success) {
@@ -123,7 +123,7 @@ function MyMatchingPage() {
   const onFinish = async (values) => {
     console.log("Success:", values);
     // 신고 요청 보내기
-    const response = await axios.post("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/matching/report-matching", values);
+    const response = await axios.post("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/matching/report-matching/", values);
     // console.log("report send data: ", values);
     // console.log("report response: ", response);
     // const res = true;

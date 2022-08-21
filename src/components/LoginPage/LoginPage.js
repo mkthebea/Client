@@ -14,7 +14,7 @@ function LoginPage() {
 
   const onFinish = async (values) => {
     // 로그인 성공시 메인 페이지로 이동
-    const response = await axios.post("https://e9c0c9c8-d370-456f-968f-03a3d0329c33.mock.pstmn.io/account/login/", values);
+    const response = await axios.post("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/account/login/", values);
     console.log("send data: ", values);
     console.log("response: ", response);
     if (response.data.success) {
