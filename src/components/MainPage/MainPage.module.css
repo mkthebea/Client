@@ -42,9 +42,17 @@
 h1 {
     height: 60px;
     font-family: 'SDSamliphopangche_Outline', sans-serif;
+    /* background-color: rgb(202,219,249); */
+    /* background-color: rgb(230,247,255); */
+    /* background-image: url("../../rice.png");
+    background-size: 30% 100%;
+    background-repeat: no-repeat;
+    background-position: center; */
+    /* border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px; */
   }
   
-  h1 span {
+h1 span {
     position: relative;
     margin-right: 5px;
     /* top: 20px; */
@@ -53,7 +61,8 @@ h1 {
     /* font-family: 'Titan One', cursive; */
     font-weight: bold;
     font-size: 40px;
-    color: #FFF;
+    color: white;
+    /* color: rgb(110,165,254); */
     text-shadow: 0 1px 0 #CCC,
                  0 2px 0 #CCC,
                  0 3px 0 #CCC,
@@ -64,22 +73,22 @@ h1 {
                  0 8px 0 transparent,
                  0 9px 0 transparent,
                  0 10px 10px rgba(0, 0, 0, .4);
-  }
+}
   
-  h1 span:nth-child(2) { animation-delay: .1s; }
-  h1 span:nth-child(3) { animation-delay: .2s; }
-  h1 span:nth-child(4) { animation-delay: .3s; }
-  h1 span:nth-child(5) { animation-delay: .4s; }
-  h1 span:nth-child(6) { animation-delay: .5s; }
-  h1 span:nth-child(7) { animation-delay: .6s; }
-  h1 span:nth-child(8) { animation-delay: .7s; }
-  h1 span:nth-child(9) { animation-delay: .8s; }
-  h1 span:nth-child(10) { animation-delay: .9s; }
-  h1 span:nth-child(11) { animation-delay: 1s; }
-  h1 span:nth-child(12) { animation-delay: 1.1s; }
-  h1 span:nth-child(13) { animation-delay: 1.2s; }
+h1 span:nth-child(2) { animation-delay: .1s; }
+h1 span:nth-child(3) { animation-delay: .2s; }
+h1 span:nth-child(4) { animation-delay: .3s; }
+h1 span:nth-child(5) { animation-delay: .4s; }
+h1 span:nth-child(6) { animation-delay: .5s; }
+h1 span:nth-child(7) { animation-delay: .6s; }
+h1 span:nth-child(8) { animation-delay: .7s; }
+h1 span:nth-child(9) { animation-delay: .8s; }
+h1 span:nth-child(10) { animation-delay: .9s; }
+h1 span:nth-child(11) { animation-delay: 1s; }
+h1 span:nth-child(12) { animation-delay: 1.1s; }
+h1 span:nth-child(13) { animation-delay: 1.2s; }
   
-  @keyframes bounce_text {
+@keyframes bounce_text {
     100% {
       /* top: -10px; */
       transform: translate3d(0, -10px, 0);
@@ -94,6 +103,6 @@ h1 {
                    0 9px 0 #CCC,
                    0 50px 25px rgba(0, 0, 0, .2);
     }
-  }
+}
   
   

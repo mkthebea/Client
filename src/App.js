@@ -11,6 +11,7 @@ import RegisterPage from "./components/RegisterPage/RegisterPage";
 import SignupPage from "./components/SignupPage/SignupPage";
 import SignupSuccessPage from "./components/SignupPage/SignupSuccessPage";
 import NewMatchingPage from "./components/NewMatchingPage/NewMatchingPage";
+import AuthFailedPage from "./components/AuthFailedPage/AuthFailedPage";
 import styles from "./App.module.css";
 import Logo from "./Logo.jpg";
 import newLogo from "./newLogo.png";
@@ -113,6 +114,7 @@ const App = () => {
               <Route path="/detail" element={<DetailPage />} />
               <Route path="/mymatching" element={<MyMatchingPage />} />
               <Route path="/newmatching" element={<NewMatchingPage />} />
+              <Route path="/authfailed" element={<AuthFailedPage />} />
             </Routes>
             {/* </div> */}
           </Content>
