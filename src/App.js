@@ -12,6 +12,8 @@ import SignupPage from "./components/SignupPage/SignupPage";
 import SignupSuccessPage from "./components/SignupPage/SignupSuccessPage";
 import NewMatchingPage from "./components/NewMatchingPage/NewMatchingPage";
 import AuthFailedPage from "./components/AuthFailedPage/AuthFailedPage";
+// import AuthRoute from "./components/AuthRoute/AuthRoute";
+
 import styles from "./App.module.css";
 import Logo from "./Logo.jpg";
 import newLogo from "./newLogo.png";
@@ -20,6 +22,9 @@ const { Header, Content, Footer, Sider } = Layout;
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
+
+  const authenticated = false; // 임시 인증 확인 변수
+
   return (
     <Router>
       <Layout className={styles.font}>
@@ -97,14 +102,6 @@ const App = () => {
               padding: 24,
             }}
           >
-            {/* <div
-              className="site-layout-background"
-              style={{
-                padding: 24,
-                textAlign: "center",
-                backgroundColor: "rgb(70, 130, 180, 0)",
-              }}
-            > */}
             <Routes>
               <Route path="/" element={<MainPage />} />
               <Route path="/login" element={<LoginPage />} />
@@ -112,9 +109,11 @@ const App = () => {
               <Route path="/signup/success" element={<SignupSuccessPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/detail" element={<DetailPage />} />
-              <Route path="/mymatching" element={<MyMatchingPage />} />
+              <Route path="/mymatching" element={authenticated ? <MyMatchingPage /> : <AuthFailedPage />} />
               <Route path="/newmatching" element={<NewMatchingPage />} />
               <Route path="/authfailed" element={<AuthFailedPage />} />
+
+              {/* <AuthRoute authenticated={authenticated} path="/mymatching" render={(props) => <MyMatchingPage {...props} />} /> */}
             </Routes>
             {/* </div> */}
           </Content>
