@@ -4,16 +4,33 @@ import { Link } from "react-router-dom";
 import { Button, Checkbox, Form, Input, message } from "antd";
 import styles from "./LoginPage.module.css";
 import axios from "axios";
+import { signIn } from "../Auth/Auth";
 
-function LoginPage() {
+function LoginPage({ setAuthenticated }) {
   // const [login, setLogin] = useState(false);
   // const fetchLogin = () => {
   //   setLogin(!login);
   //   console.log("로그인 상태: ", login);
   // };
 
+  // 임시 로그인 데이터베이스 인증 구현
+  // const onFinish = (values) => {
+  //   console.log("로그인 시도: ", values);
+  //   const res = signIn(values);
+  //   console.log("로그인 결과: ", res);
+  //   if (res) {
+  //     setAuthenticated(true);
+  //     message.success("로그인 성공");
+  //     // setTimeout(() => {
+  //     //   window.location.replace("/");
+  //     // }, 1000);
+  //   }
+  // };
+  // 여기까지
+
   const onFinish = async (values) => {
     // 로그인 성공시 메인 페이지로 이동
+    // console.log("send data: ", values);
     const response = await axios.post("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/account/login/", values);
     console.log("send data: ", values);
     console.log("response: ", response);
@@ -49,7 +66,7 @@ function LoginPage() {
         >
           <Form.Item
             label="학교 이메일"
-            name="userEmail"
+            name="email"
             rules={[
               {
                 required: true,

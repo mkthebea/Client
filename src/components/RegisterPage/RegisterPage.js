@@ -6,6 +6,8 @@ import axios from "axios";
 function RegisterPage() {
   const onFinish = async (values) => {
     values["name"] = values["name"].split(" ").join(""); //문자열 공백 제거
+    // console.log("send data: ", values);
+
     const response = await axios.post("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/matzip/create-matzip/", values);
     // console.log("send data: ", values);
     // console.log("response: ", response);

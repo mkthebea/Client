@@ -5,7 +5,7 @@ import styles from "./SignupPage.module.css";
 import axios from "axios";
 
 function SignupPage() {
-  const [signUp, setSignUp] = useState(false);
+  const [signUp, setSignUp] = useState(true);
 
   // 닉네임 리스트 서버에 요청
   const [nicknameList, setNicknameList] = useState([]);
@@ -21,12 +21,14 @@ function SignupPage() {
   const fetchSignUp = async (values) => {
     const accountData = { userEmail: values.userEmail, password: values.password };
     let profileData = { nickname: values.nickname, major: values.major, gender: values.gender };
+    console.log("sign up: ", accountData);
+    console.log("profile: ", profileData);
 
     await axios.post("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/account/signup/", accountData).then((response) => {
       if (response.data.success) {
         setSignUp(response.data.success);
-        console.log("account 응답: ", response);
-        console.log("account 전송 데이터: ", accountData);
+        // console.log("account 응답: ", response);
+        // console.log("account 전송 데이터: ", accountData);
 
         //account_id
         profileData["accountId"] = response.data.accountId;

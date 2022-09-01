@@ -141,6 +141,63 @@ function MyMatchingPage() {
     console.log("에러 발생: ", errorInfo);
   };
 
+  const testData = [
+    {
+      name: "우뇽파스타",
+      date: "2022-08-13 13:00",
+      id: 1,
+      follower: ["밈갬", "영갬", "오구"],
+    },
+    {
+      name: "중대양곱창",
+      date: "2022-08-12 21:00",
+      id: 2,
+      follower: ["밈갬", "오구"],
+    },
+    {
+      name: "피맥하우스",
+      date: "2022-08-04 11:50",
+      id: 3,
+      follower: ["영갬", "오구"],
+    },
+    {
+      name: "북촌순두부",
+      date: "2022-09-3 16:00",
+      id: 4,
+      follower: ["밈갬", "영갬"],
+    },
+  ];
+  testData.forEach((item) => {
+    const diff = new Date(item.date) - nowTime;
+    let remain = "";
+    if (diff <= 0) {
+      remain += "매칭 완료";
+      item["status"] = "done";
+    } else {
+      const diffDay = Math.floor(diff / (1000 * 60 * 60 * 24));
+      if (diffDay > 0) {
+        remain += diffDay + "일 ";
+      }
+      const diffHour = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      if (diffHour > 0) {
+        remain += diffHour + "시간 ";
+      }
+      const diffMin = Math.floor((diff / (1000 * 60)) % 60);
+      if (diffMin > 0) {
+        remain += diffMin + "분 ";
+      }
+      remain += "남음";
+      if (diffDay == 0 && diffHour == 0 && diffMin <= 59) {
+        item["status"] = "coming";
+      } else {
+        item["status"] = "";
+      }
+      // const diffSec = Math.floor((diff / 1000) % 60);
+    }
+
+    item["remain"] = remain;
+  });
+
   return (
     <div className={styles.container}>
       <div className={styles.form_container}>
@@ -150,7 +207,8 @@ function MyMatchingPage() {
             gutter: 16,
             column: 3,
           }}
-          dataSource={userMatchingList}
+          // dataSource={userMatchingList}
+          dataSource={testData}
           renderItem={(item) => (
             <List.Item>
               <Card title={item.name} hoverable="true" headStyle={{ fontSize: "18px" }}>
