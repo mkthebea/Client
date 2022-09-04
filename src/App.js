@@ -1,5 +1,5 @@
 import { HomeOutlined, LoginOutlined, LogoutOutlined, ClockCircleOutlined, PlusCircleOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, message } from "antd";
 import "antd/dist/antd.min.css";
 import React, { useState, useEffect, Component } from "react";
 import { Link, BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -12,8 +12,8 @@ import SignupPage from "./components/SignupPage/SignupPage";
 import SignupSuccessPage from "./components/SignupPage/SignupSuccessPage";
 import NewMatchingPage from "./components/NewMatchingPage/NewMatchingPage";
 import AuthFailedPage from "./components/AuthFailedPage/AuthFailedPage";
-// import AuthRoute from "./components/AuthRoute/AuthRoute";
-import { signIn } from "./components/Auth/Auth";
+
+import axios from "axios";
 
 import styles from "./App.module.css";
 import Logo from "./Logo.jpg";
@@ -24,16 +24,31 @@ const { Header, Content, Footer, Sider } = Layout;
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
 
-  // const [user, setUser] = useState(null); // 로그인된 사용자 정보
-  // const authenticated = user != null; // 로그인된 사용자가 존재하는지, 즉 인증 여부를 저장
+  axios.defaults.withCredentials = true;
 
-  // const login = ({ email, password }) => setUser(signIn({ email, password }));
-  // const logout = () => setUser(null);
+  const [login, setLogin] = useState(true);
+  const fetchLogin = async () => {
+    const response = await axios.get("/api/account/login_check/");
+    console.log("login check response: ", response);
+    if (response.data.success) {
+      setLogin(true);
+    }
+  };
 
-  const [authenticated, setAuthenticated] = useState(false);
-  const logout = () => {
-    console.log("로그아웃");
-    setAuthenticated(false);
+  useEffect(() => {
+    fetchLogin();
+  }, []);
+
+  const logout = async () => {
+    const response = await axios.post("/api/account/logout/");
+    if (response.data.success) {
+      message.success("로그아웃 완료");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } else {
+      message.error(response.data.errorMessage);
+    }
   };
 
   return (
@@ -59,7 +74,7 @@ const App = () => {
                 맛집 등록
               </Link>
             </Menu.Item>
-            {authenticated ? (
+            {login ? (
               <Menu.Item key="logout" icon={<LogoutOutlined />}>
                 <div onClick={logout} className={styles.menu_link}>
                   로그아웃
@@ -85,9 +100,6 @@ const App = () => {
                 onClick: () => setCollapsed(!collapsed),
               })}
             </div>
-            {/* <Link to="/">
-              <span style={{ color: "red", fontSize: "30px" }}>맛</span>집 매<span style={{ color: "blue", fontSize: "30px" }}>칭</span>은, <span style={{ fontSize: "30px" }}>맛칭!</span>
-            </Link> */}
             <div className={styles.food_container}>
               <div className={styles.text}>맛집 매칭은, 맛칭!&nbsp;&nbsp;&nbsp;</div>
               <div className={styles.food}>🍔</div>
@@ -111,24 +123,15 @@ const App = () => {
           >
             <Routes>
               <Route path="/" element={<MainPage />} />
-              {/* <Route path="/login" element={<LoginPage />} /> */}
-              {/* 임시 로그인 데이터베이스 */}
-              {/* <Route path="/login" render={() => <LoginPage authenticated={authenticated} login={login} />} /> */}
-              {/* <Route path="/login" element={<LoginPage authenticated={authenticated} login={login} />} /> */}
-              <Route path="/login" element={<LoginPage setAuthenticated={setAuthenticated} />} />
-
+              <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/signup/success" element={<SignupSuccessPage />} />
-              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/register" element={login ? <RegisterPage /> : <AuthFailedPage />} />
               <Route path="/detail" element={<DetailPage />} />
-              {/* <Route path="/mymatching" element={authenticated ? <MyMatchingPage /> : <AuthFailedPage />} /> */}
-              <Route path="/mymatching" element={<MyMatchingPage />} />
-              <Route path="/newmatching" element={<NewMatchingPage />} />
+              <Route path="/mymatching" element={login ? <MyMatchingPage /> : <AuthFailedPage />} />
+              <Route path="/newmatching" element={login ? <NewMatchingPage /> : <AuthFailedPage />} />
               <Route path="/authfailed" element={<AuthFailedPage />} />
-
-              {/* <AuthRoute authenticated={authenticated} path="/mymatching" render={(props) => <MyMatchingPage {...props} />} /> */}
             </Routes>
-            {/* </div> */}
           </Content>
           <Footer
             style={{

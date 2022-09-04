@@ -6,23 +6,19 @@ import axios from "axios";
 function RegisterPage() {
   const onFinish = async (values) => {
     values["name"] = values["name"].split(" ").join(""); //문자열 공백 제거
-    // console.log("send data: ", values);
 
-    const response = await axios.post("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/matzip/create-matzip/", values);
-    // console.log("send data: ", values);
-    // console.log("response: ", response);
+    const response = await axios.post("/api/matzip/", values);
+    console.log("register send data: ", values);
+    console.log("register response: ", response);
     if (response.data.success) {
-      // console.log("Success");
       message.success("식당 등록 성공!");
     } else {
-      // message.error("이미 리스트에 등록된 식당입니다. 맛칭 리스트를 확인하세요.");
       message.error(response.data.errorMessage);
     }
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
-    // message.error("에러 발생");
   };
 
   return (

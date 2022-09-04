@@ -12,9 +12,9 @@ function MyMatchingPage() {
   const [userMatchingList, setUserMatchingList] = useState([]);
 
   const fetchUserMatchingList = async () => {
-    const response = await axios.get("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/matching/user-matching/");
+    const response = await axios.get("/api/profile/my-matchings/");
     setUserMatchingList(response.data.userMatching);
-    // console.log("response: ", response);
+    console.log("my matching response: ", response);
   };
 
   useEffect(() => {
@@ -82,15 +82,14 @@ function MyMatchingPage() {
   });
 
   const onCancel = async (id) => {
-    const response = await axios.delete("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/matching/cancel/", { id: id });
-    // console.log("delete send data: ", { id: id });
-    // console.log("delete response: ", response);
+    const response = await axios.delete(`/api/matching/${id}/cancel/`);
+    console.log("delete response: ", response);
     if (response.data.success) {
       message.success("취소 완료");
       console.log("cancel: ", id);
       fetchUserMatchingList(); // 취소 후 내 매칭 리스트 리로드
     } else {
-      message.error("취소 요청 실패");
+      message.error(response.data.errorMessage);
     }
   };
 
@@ -123,17 +122,18 @@ function MyMatchingPage() {
   const onFinish = async (values) => {
     console.log("Success:", values);
     // 신고 요청 보내기
-    const response = await axios.post("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/matching/report-matching/", values);
-    // console.log("report send data: ", values);
-    // console.log("report response: ", response);
-    // const res = true;
+    console.log("report send data: ", values);
+
+    const response = await axios.post("/api/profile/report/", values);
+    console.log("report send data: ", values);
+    console.log("report response: ", response);
     if (response.data.success) {
       message.success("신고 완료");
       setTimeout(() => {
         setIsModalVisible(false);
       }, 1000);
     } else {
-      message.error("신고 요청 실패");
+      message.error(response.data.errorMessage);
     }
   };
 
@@ -162,7 +162,7 @@ function MyMatchingPage() {
     },
     {
       name: "북촌순두부",
-      date: "2022-09-3 16:00",
+      date: "2022-09-30 16:00",
       id: 4,
       follower: ["밈갬", "영갬"],
     },

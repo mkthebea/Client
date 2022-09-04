@@ -11,30 +11,22 @@ function NewMatchingPage() {
       message.error("최대 인원 수는 최소 인원 수보다 커야 합니다.");
     } else {
       let data = values;
-      // const date = data["date"].format("YYYY-MM-DD");
-      // const startTime = data["startTime"].format("HH:MM");
-      // const endTime = data["time"][1].format("HH:MM");
-
-      // data[date] = date + " " + startTime + " ~ " + endTime;
 
       data["date"] = data["date"].format("YYYY-MM-DD");
-      data["startTime"] = data["startTime"].format("HH:MM");
+      data["startTime"] = data["date"] + " " + data["startTime"].format("HH:MM");
+      delete data.date;
 
       // 매칭 등록 요청 보내기
-      // console.log("send data: ", data);
-
-      const response = await axios.post("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/matching/create-matching/", data);
-      // console.log("send data: ", data);
-      // console.log("response: ", response);
+      const response = await axios.post("/api/matching/new/", data);
+      console.log("new matching send data: ", data);
+      console.log("new matching response: ", response);
       if (response.data.success) {
         console.log("Success:", data);
         message.success("등록 완료!");
       } else {
-        message.error("에러 발생, 다시 시도하세요.");
+        message.error(response.data.errorMessage);
       }
     }
-
-    // window.location.replace("/");
   };
 
   return (
@@ -54,14 +46,14 @@ function NewMatchingPage() {
           <Form.Item label="식당 이름" name={"name"} rules={[{ required: true, message: "식당 이름을 입력하세요" }]}>
             <Input />
           </Form.Item>
-          <Form.Item label="성별" name={["tags", "gender"]} rules={[{ required: true, message: "성별을 선택하세요" }]}>
+          <Form.Item label="성별" name={"gender"} rules={[{ required: true, message: "성별을 선택하세요" }]}>
             <Select>
-              <Select.Option value="woman">여성</Select.Option>
-              <Select.Option value="man">남성</Select.Option>
-              <Select.Option value="both">성별 무관</Select.Option>
+              <Select.Option value="F">여성</Select.Option>
+              <Select.Option value="M">남성</Select.Option>
+              <Select.Option value="X">성별 무관</Select.Option>
             </Select>
           </Form.Item>
-          <Form.Item label="학과" name={["tags", "major"]} rules={[{ required: true, message: "학과를 선택하세요" }]}>
+          <Form.Item label="학과" name={"major"} rules={[{ required: true, message: "학과를 선택하세요" }]}>
             <Select>
               <Select.Option value="bi">경영학과</Select.Option>
               <Select.Option value="ec">경제학과</Select.Option>
@@ -74,10 +66,10 @@ function NewMatchingPage() {
               <Select.Option value="all">학과 무관</Select.Option>
             </Select>
           </Form.Item>
-          <Form.Item label="만남 모드" name={["tags", "mode"]} rules={[{ required: true, message: "만남 모드를 선택하세요" }]}>
+          <Form.Item label="만남 모드" name={"mode"} rules={[{ required: true, message: "만남 모드를 선택하세요" }]}>
             <Select>
-              <Select.Option value="eat">밥만 먹어요</Select.Option>
-              <Select.Option value="friend">우리 친해져요</Select.Option>
+              <Select.Option value={false}>밥만 먹어요</Select.Option>
+              <Select.Option value={true}>우리 친해져요</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item

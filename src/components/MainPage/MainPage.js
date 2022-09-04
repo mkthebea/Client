@@ -50,18 +50,14 @@ function MainPage() {
 
     // 매칭 신청 요청 보내기
     // const res = joinMatching();
-    const response = await axios.post("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/matching/join/", { id: Id });
-    // console.log("send data: ", { id: Id });
-    // console.log("response: ", response, "response.data.success: ", response.data.success);
-    // const isSuccess = response.data.success;
-    // console.log(response.data.success);
+    const response = await axios.post(`/api/matching/${Id}/join/`);
     if (response.data.success) {
       message.success("신청 완료!");
       setTimeout(() => {
         setIsModalVisible(false);
       }, 1000);
     } else {
-      message.error("에러 발생: 잠시 후 다시 시도하세요.");
+      message.error(response.data.errorMessage);
     }
   };
 
@@ -72,10 +68,9 @@ function MainPage() {
   const [matchingList, setMatchingList] = useState([]);
 
   const fetchMatchingList = async () => {
-    const response = await axios.get("https://052bfbc0-39d2-45b5-af89-680415b4bd7c.mock.pstmn.io/matching/");
+    const response = await axios.get("/api/matzip/now/");
     setMatchingList(response.data.matchingList);
-    console.log("response: ", response.data.matchingList);
-    // console.log("matchingList: ", matchingList);
+    console.log("main page response: ", response);
   };
 
   useEffect(() => {
@@ -710,19 +705,6 @@ function MainPage() {
   return (
     <div className={styles.container}>
       <h1>
-        {/* <span>M</span>
-        <span>a</span>
-        <span>t</span>
-        <span>C</span>
-        <span>h</span>
-        <span>i</span>
-        <span>n</span>
-        <span>g</span>
-        <span>&nbsp;</span>
-        <span>N</span>
-        <span>o</span>
-        <span>w</span>
-        <span>!</span> */}
         <span>대</span>
         <span>기</span>
         <span>중</span>
