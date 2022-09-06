@@ -1,10 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, TimePicker, DatePicker, Form, Input, InputNumber, Select, message } from "antd";
 import styles from "./NewMatchingPage.module.css";
 import axios from "axios";
 
 function NewMatchingPage() {
   const { TextArea } = Input;
+  const { Option } = Select;
+
+  // 모든 식당 이름 가져오기
+  const [resList, setResList] = useState([]);
+  const fetchResList = async () => {
+    const response = await axios.get("/api/matzip/");
+    if (response.data.success) {
+      setResList(response.data.resList);
+    } else {
+      message.error(response.data.errorMessage);
+    }
+    // setResList(["우뇽파스타", "북촌순두부"]);
+  };
+  useEffect(() => {
+    fetchResList();
+  });
 
   const onFinish = async (values) => {
     if (values.max <= values.min) {
@@ -12,6 +28,7 @@ function NewMatchingPage() {
     } else {
       let data = values;
 
+      // 날짜 데이터 가공
       data["date"] = data["date"].format("YYYY-MM-DD");
       data["startTime"] = data["date"] + " " + data["startTime"].format("HH:MM");
       delete data.date;
@@ -44,7 +61,11 @@ function NewMatchingPage() {
           onFinish={onFinish}
         >
           <Form.Item label="식당 이름" name={"name"} rules={[{ required: true, message: "식당 이름을 입력하세요" }]}>
-            <Input />
+            <Select showSearch placeholder="식당 검색" optionFilterProp="children" filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}>
+              {resList.map((r) => (
+                <Option value={r}>{r}</Option>
+              ))}
+            </Select>
           </Form.Item>
           <Form.Item label="성별" name={"gender"} rules={[{ required: true, message: "성별을 선택하세요" }]}>
             <Select>
@@ -111,12 +132,10 @@ function NewMatchingPage() {
           <Form.Item label="한줄 소개" name={"description"}>
             <TextArea rows={3} placeholder="maxLength is 30" maxLength={30} />
           </Form.Item>
-
           <Form.Item
             className={styles.button_container}
             wrapperCol={{
               offset: 11,
-              // span: 12,
             }}
           >
             <Button type="primary" htmlType="submit" className={styles.button}>
