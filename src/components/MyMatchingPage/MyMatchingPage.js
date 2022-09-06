@@ -96,12 +96,14 @@ function MyMatchingPage() {
   const onReport = (id, follower) => {
     setIsModalVisible(true);
     setModalData(follower);
+    setModalId(id);
     // console.log("report: ", id);
   };
 
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [modalData, setModalData] = useState([]);
-  const [reportData, setReportData] = useState({ name: [], category: "", desc: "" });
+  const [modalData, setModalData] = useState([]); // 신고 모달에 보여줄 follower
+  const [modalId, setModalId] = useState(0); // 신고 시 보낼 매칭 id
+  // const [reportData, setReportData] = useState({ name: [], category: "", desc: "" });
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -120,9 +122,10 @@ function MyMatchingPage() {
   };
 
   const onFinish = async (values) => {
-    console.log("Success:", values);
+    let reportData = values;
+    reportData["id"] = modalId;
     // 신고 요청 보내기
-    console.log("report send data: ", values);
+    console.log("report send data: ", reportData);
 
     const response = await axios.post("/api/profile/report/", values);
     console.log("report send data: ", values);
@@ -133,7 +136,7 @@ function MyMatchingPage() {
         setIsModalVisible(false);
       }, 1000);
     } else {
-      message.error(response.data.errorMessage);
+      message.error("알 수 없는 에러: 신고 요청 실패");
     }
   };
 
@@ -143,28 +146,28 @@ function MyMatchingPage() {
 
   const testData = [
     {
+      name: "북촌순두부",
+      date: "2022-09-06 16:00",
+      id: 4,
+      follower: ["밈갬", "영갬"],
+    },
+    {
       name: "우뇽파스타",
-      date: "2022-08-13 13:00",
+      date: "2022-08-10 13:00",
       id: 1,
       follower: ["밈갬", "영갬", "오구"],
     },
     {
       name: "중대양곱창",
-      date: "2022-08-12 21:00",
+      date: "2022-08-22 21:00",
       id: 2,
       follower: ["밈갬", "오구"],
     },
     {
       name: "피맥하우스",
-      date: "2022-08-04 11:50",
+      date: "2022-08-23 11:50",
       id: 3,
       follower: ["영갬", "오구"],
-    },
-    {
-      name: "북촌순두부",
-      date: "2022-09-30 16:00",
-      id: 4,
-      follower: ["밈갬", "영갬"],
     },
   ];
   testData.forEach((item) => {

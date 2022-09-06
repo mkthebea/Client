@@ -336,13 +336,13 @@ function MainPage() {
       matchings: [
         {
           tags: ["여성", "산업보안학과", "우리 친해져요"],
-          startTime: "2022-08-10 16:00",
-          endTime: "2022-08-10 18:00",
+          startTime: "2022-09-06 16:00",
+          endTime: "2022-09-06 18:00",
           duration: "2시간",
-          description: "여기 맛있어요!",
+          description: "뚝배기 파스타가 유명한 집입니다. 무료로 양 추가 할 수 있어요~!",
           max: 5,
           id: 1,
-          follower: ["밈갬", "영갬", "오구"],
+          follower: ["영갬", "오구"],
         },
         {
           tags: ["여성", "산업보안학과", "밥만 먹어요"],
