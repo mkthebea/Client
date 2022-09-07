@@ -45,7 +45,7 @@ function MainPage() {
   // };
 
   const handleOk = async () => {
-    // console.log("매칭 신청: ", { id: Id });
+    console.log("매칭 신청: ", { id: Id });
     // console.log(matchingList);
 
     // 매칭 신청 요청 보내기
@@ -207,15 +207,15 @@ function MainPage() {
           children: [
             {
               text: "여성",
-              value: "여성",
+              value: "F",
             },
             {
               text: "남성",
-              value: "남성",
+              value: "M",
             },
             {
               text: "성별 무관",
-              value: "성별 무관",
+              value: "X",
             },
           ],
         },
@@ -267,11 +267,11 @@ function MainPage() {
           children: [
             {
               text: "밥만 먹어요",
-              value: "밥만 먹어요",
+              value: true,
             },
             {
               text: "우리 친해져요",
-              value: "우리 친해져요",
+              value: false,
             },
           ],
         },
@@ -284,31 +284,39 @@ function MainPage() {
         <>
           {tags.map((tag) => {
             let color = tag.length > 5 ? "geekblue" : "magenta";
+            let text = tag;
 
             if (tag === "모든 학과") {
               color = "gold";
             }
 
-            if (tag === "여성") {
+            if (tag === "F") {
               color = "volcano";
+              text = "여성";
             }
-            if (tag === "남성") {
+            if (tag === "M") {
               color = "orange";
+              text = "남성";
             }
-            if (tag === "성별 무관") {
+            if (tag === "X") {
               color = "purple";
+              text = "성별 무관";
             }
 
-            if (tag === "우리 친해져요") {
-              color = "lime";
-            }
-            if (tag === "밥만 먹어요") {
+            if (tag === true) {
               color = "cyan";
+              text = "밥만 먹어요";
+            }
+
+            if (tag === false) {
+              color = "lime";
+              text = "우리 친해져요";
             }
 
             return (
               <Tag color={color} key={tag}>
-                {tag.toUpperCase()}
+                {/* {tag.toUpperCase()} */}
+                {text}
               </Tag>
             );
           })}
@@ -715,7 +723,7 @@ function MainPage() {
         <span>!</span>
       </h1>
       <div className={styles.table_container}>
-        <Table scroll={{ y: "65vh" }} pagination={false} columns={columns} dataSource={testData} className={styles.table} />
+        <Table scroll={{ y: "65vh" }} pagination={false} columns={columns} dataSource={matchingList} className={styles.table} />
       </div>
       <Modal
         title="매칭 신청"

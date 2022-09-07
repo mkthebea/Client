@@ -18,8 +18,11 @@ function DetailPage(props) {
   // 매칭 id 초기화
 
   useEffect(() => {
-    props.setId(matchings[0].id);
+    if (waiting !== 0) {
+      props.setId(matchings[0].id);
+    }
   }, [matchings[0].id]);
+  // }, []);
 
   const { TabPane } = Tabs;
 
@@ -91,6 +94,7 @@ function DetailPage(props) {
               <TabPane tab={`매칭 ${i + 1}`} key={i}>
                 <Descriptions title="매칭 정보" bordered>
                   <Descriptions.Item label="맛집">{name}</Descriptions.Item>
+                  <Descriptions.Item label="주최자">{matchings[i].leader}</Descriptions.Item>
                   <Descriptions.Item label="대기자">
                     총 {[...matchings[i].follower].length}명
                     {matchings[i].follower.map((f) => {
@@ -98,11 +102,12 @@ function DetailPage(props) {
                     })}
                   </Descriptions.Item>
                   <Descriptions.Item label="최대 인원">{matchings[i].max}</Descriptions.Item>
+                  <Descriptions.Item label="최소 인원">{matchings[i].min}</Descriptions.Item>
 
                   <Descriptions.Item label="매칭 조건">
-                    성별: {[...matchings[i].tags][0]} <br />
+                    성별: {[...matchings[i].tags][0] === "F" ? "여성" : [...matchings[i].tags][0] === "M" ? "남성" : "성별 무관"} <br />
                     학과: {[...matchings[i].tags][1]} <br />
-                    만남 모드: {[...matchings[i].tags][2]} <br />
+                    만남 모드: {[...matchings[i].tags][2] ? "밥만 먹어요" : "우리 친해져요"} <br />
                   </Descriptions.Item>
                   <Descriptions.Item label="시작 시간">{matchings[i].startTime}</Descriptions.Item>
                   <Descriptions.Item label="끝나는 시간">{matchings[i].endTime}</Descriptions.Item>
