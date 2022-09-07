@@ -12,6 +12,7 @@ import SignupPage from "./components/SignupPage/SignupPage";
 import SignupSuccessPage from "./components/SignupPage/SignupSuccessPage";
 import NewMatchingPage from "./components/NewMatchingPage/NewMatchingPage";
 import AuthFailedPage from "./components/AuthFailedPage/AuthFailedPage";
+import NotFound from "./components/NotFound/NotFound";
 
 import axios from "axios";
 
@@ -131,6 +132,7 @@ const App = () => {
               <Route path="/mymatching" element={login ? <MyMatchingPage /> : <AuthFailedPage />} />
               <Route path="/newmatching" element={login ? <NewMatchingPage /> : <AuthFailedPage />} />
               <Route path="/authfailed" element={<AuthFailedPage />} />
+              <Route path="/*" element={<NotFound />} />
             </Routes>
           </Content>
           <Footer
