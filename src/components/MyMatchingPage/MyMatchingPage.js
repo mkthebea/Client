@@ -150,6 +150,9 @@ function MyMatchingPage() {
       date: "2022-09-06 16:00",
       id: 4,
       follower: ["밈갬", "영갬"],
+      // ************ 작업 필요 ************
+      is_closed: true, //추가 - 매칭시간이 지난경우 true
+      is_matched: false, //추가 - 최소인원이 넘어서 매칭이 성사된 경우 true
     },
     {
       name: "우뇽파스타",
