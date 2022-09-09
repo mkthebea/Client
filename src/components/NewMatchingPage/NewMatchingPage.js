@@ -11,6 +11,7 @@ function NewMatchingPage() {
   const [resList, setResList] = useState([]);
   const fetchResList = async () => {
     const response = await axios.get("/api/matzip/");
+    console.log("식당 리스트 response: ", response);
     if (response.data.success) {
       setResList(response.data.resList);
     } else {

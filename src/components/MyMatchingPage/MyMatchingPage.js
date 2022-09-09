@@ -147,11 +147,11 @@ function MyMatchingPage() {
   const testData = [
     {
       name: "북촌순두부",
-      date: "2022-09-06 16:00",
+      date: "2022-09-11 16:00",
       id: 4,
       follower: ["밈갬", "영갬"],
-      // 매칭 인원 미달로 매칭 성사 실패
-      is_closed: true, //추가 - 매칭시간이 지난경우 true
+
+      is_closed: false, //추가 - 매칭시간이 지난경우 true
       is_matched: false, //추가 - 최소인원이 넘어서 매칭이 성사된 경우 true
     },
     {
@@ -176,7 +176,7 @@ function MyMatchingPage() {
     },
     {
       name: "피맥하우스",
-      date: "2022-09-10 00:50",
+      date: "2022-09-10 01:50",
       id: 3,
       follower: ["영갬", "오구"],
 
@@ -189,9 +189,9 @@ function MyMatchingPage() {
     const diff = new Date(item.date) - nowTime;
     let remain = "";
 
-    if (item.is_closed && !item.is_matched) {
-      remain += "매칭 실패";
-      item["status"] = "매칭 실패";
+    if (!item.is_closed && !item.is_matched) {
+      remain += "매칭 대기중";
+      item["status"] = "매칭 대기중";
     } else if (diff <= 0) {
       remain += "매칭 완료";
       item["status"] = "done";
@@ -238,11 +238,11 @@ function MyMatchingPage() {
           dataSource={testData}
           renderItem={(item) => (
             <List.Item>
-              <Card title={item.name} hoverable="true" headStyle={{ fontSize: "18px" }} className={item.is_closed && !item.is_matched ? styles.failed : null}>
+              <Card title={item.name} hoverable="true" headStyle={{ fontSize: "18px" }} className={!item.is_closed && !item.is_matched ? styles.waiting : null}>
                 <div className={styles.content_container}>
                   <div>
-                    <span className={item.is_closed && !item.is_matched ? styles.date_text_failed : styles.date_text}>{item.date} &nbsp;&nbsp;</span>
-                    <span className={item.is_closed && !item.is_matched ? styles.diff_text_failed : styles.diff_text}>{item.remain}</span>
+                    <span className={!item.is_closed && !item.is_matched ? styles.date_text_waiting : styles.date_text}>{item.date} &nbsp;&nbsp;</span>
+                    <span className={!item.is_closed && !item.is_matched ? styles.diff_text_waiting : styles.diff_text}>{item.remain}</span>
                   </div>
                   {item.status === "" ? (
                     <Button
@@ -297,7 +297,7 @@ function MyMatchingPage() {
           >
             <Form.Item
               label="신고할 닉네임"
-              name="nickname"
+              name="target"
               rules={[
                 {
                   required: true,
@@ -305,10 +305,15 @@ function MyMatchingPage() {
                 },
               ]}
             >
-              <Checkbox.Group options={modalData} />
+              {/* <Checkbox.Group options={modalData} /> */}
+              <Select>
+                {modalData.map((user) => (
+                  <Option value={user}>{user}</Option>
+                ))}
+              </Select>
             </Form.Item>
 
-            <Form.Item label="신고 항목 선택" name="category" rules={[{ required: true, message: "신고 항목을 선택하세요." }]}>
+            <Form.Item label="신고 항목 선택" name="type" rules={[{ required: true, message: "신고 항목을 선택하세요." }]}>
               <Select>
                 <Option value="노쇼">노쇼</Option>
                 <Option value="비매너">비매너</Option>
