@@ -24,8 +24,8 @@ function NewMatchingPage() {
   }, []);
 
   const onFinish = async (values) => {
-    if (values.max <= values.min) {
-      message.error("최대 인원 수는 최소 인원 수보다 커야 합니다.");
+    if (values.max < values.min) {
+      message.error("최대 인원 수는 최소 인원 수보다 크거나 같아야 합니다.");
     } else {
       let data = values;
 
@@ -41,6 +41,9 @@ function NewMatchingPage() {
       if (response.data.success) {
         console.log("Success:", data);
         message.success("등록 완료!");
+        setTimeout(() => {
+          window.location.replace("/");
+        }, 1000);
       } else {
         message.error(response.data.errorMessage);
       }
@@ -130,7 +133,7 @@ function NewMatchingPage() {
           <Form.Item label="최대 인원" name={"max"} rules={[{ required: true, message: "최대 인원을 입력하세요" }]}>
             <InputNumber min={2} max={10} defaultValue={3} />
           </Form.Item>
-          <Form.Item label="한줄 소개" name={"description"}>
+          <Form.Item label="한줄 소개" name={"description"} rules={[{ required: true, message: "한줄 소개를 입력하세요" }]}>
             <TextArea rows={3} placeholder="maxLength is 30" maxLength={30} />
           </Form.Item>
           <Form.Item
