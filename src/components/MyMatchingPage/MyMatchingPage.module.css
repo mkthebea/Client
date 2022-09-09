@@ -36,8 +36,17 @@
     font-weight: bold;
     color: rgb(110,165,254);
 }
+.date_text_failed {
+    font-size: 18px;
+    font-weight: bold;
+    color: gray;
+}
 
 .diff_text {
+    font-size: 12px;
+    color: gray;
+}
+.diff_text_failed {
     font-size: 12px;
     color: gray;
 }
@@ -50,4 +59,10 @@
 
 .modal {
     font-family: 'SDSamliphopangche_Basic', sans-serif;
+}
+
+.failed {
+    background-color: rgb(217,217,217);
+    /* opacity: 0.3; */
+    /* color: white; */
 }

@@ -150,33 +150,49 @@ function MyMatchingPage() {
       date: "2022-09-06 16:00",
       id: 4,
       follower: ["밈갬", "영갬"],
-      // ************ 작업 필요 ************
+      // 매칭 인원 미달로 매칭 성사 실패
       is_closed: true, //추가 - 매칭시간이 지난경우 true
       is_matched: false, //추가 - 최소인원이 넘어서 매칭이 성사된 경우 true
     },
     {
       name: "우뇽파스타",
-      date: "2022-08-10 13:00",
+      date: "2022-09-10 13:00",
       id: 1,
       follower: ["밈갬", "영갬", "오구"],
+
+      // 매칭 인원 모이길 대기중
+      is_closed: false,
+      is_matched: false,
     },
     {
       name: "중대양곱창",
       date: "2022-08-22 21:00",
       id: 2,
       follower: ["밈갬", "오구"],
+
+      // 매칭이 성사되어 끝남
+      is_closed: true,
+      is_matched: true,
     },
     {
       name: "피맥하우스",
-      date: "2022-08-23 11:50",
+      date: "2022-09-10 00:50",
       id: 3,
       follower: ["영갬", "오구"],
+
+      // 매칭이 성사되었고 아직 시작 전
+      is_closed: false,
+      is_matched: true,
     },
   ];
   testData.forEach((item) => {
     const diff = new Date(item.date) - nowTime;
     let remain = "";
-    if (diff <= 0) {
+
+    if (item.is_closed && !item.is_matched) {
+      remain += "매칭 실패";
+      item["status"] = "매칭 실패";
+    } else if (diff <= 0) {
       remain += "매칭 완료";
       item["status"] = "done";
     } else {
@@ -193,15 +209,20 @@ function MyMatchingPage() {
         remain += diffMin + "분 ";
       }
       remain += "남음";
-      if (diffDay == 0 && diffHour == 0 && diffMin <= 59) {
+      if (diffDay === 0 && diffHour === 0 && diffMin <= 59) {
         item["status"] = "coming";
       } else {
         item["status"] = "";
       }
-      // const diffSec = Math.floor((diff / 1000) % 60);
     }
 
     item["remain"] = remain;
+  });
+
+  testData.sort((a, b) => {
+    if (a.remain > b.remain) return 1;
+    else if (b.remain > a.remain) return -1;
+    else return 0;
   });
 
   return (
@@ -217,11 +238,11 @@ function MyMatchingPage() {
           dataSource={testData}
           renderItem={(item) => (
             <List.Item>
-              <Card title={item.name} hoverable="true" headStyle={{ fontSize: "18px" }}>
+              <Card title={item.name} hoverable="true" headStyle={{ fontSize: "18px" }} className={item.is_closed && !item.is_matched ? styles.failed : null}>
                 <div className={styles.content_container}>
                   <div>
-                    <span className={styles.date_text}>{item.date} &nbsp;&nbsp;</span>
-                    <span className={styles.diff_text}>{item.remain}</span>
+                    <span className={item.is_closed && !item.is_matched ? styles.date_text_failed : styles.date_text}>{item.date} &nbsp;&nbsp;</span>
+                    <span className={item.is_closed && !item.is_matched ? styles.diff_text_failed : styles.diff_text}>{item.remain}</span>
                   </div>
                   {item.status === "" ? (
                     <Button
