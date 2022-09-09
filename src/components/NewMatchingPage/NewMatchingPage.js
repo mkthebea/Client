@@ -21,7 +21,7 @@ function NewMatchingPage() {
   };
   useEffect(() => {
     fetchResList();
-  });
+  }, []);
 
   const onFinish = async (values) => {
     if (values.max <= values.min) {
