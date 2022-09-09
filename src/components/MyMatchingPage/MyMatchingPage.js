@@ -244,7 +244,7 @@ function MyMatchingPage() {
                     <span className={!item.is_closed && !item.is_matched ? styles.date_text_waiting : styles.date_text}>{item.date} &nbsp;&nbsp;</span>
                     <span className={!item.is_closed && !item.is_matched ? styles.diff_text_waiting : styles.diff_text}>{item.remain}</span>
                   </div>
-                  {item.status === "" ? (
+                  {item.status === "" || item.status === "매칭 대기중" ? (
                     <Button
                       onClick={() => {
                         onCancel(item.id);
