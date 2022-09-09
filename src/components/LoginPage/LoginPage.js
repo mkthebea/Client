@@ -9,7 +9,6 @@ function LoginPage() {
   const onFinish = async (values) => {
     // 로그인 성공시 메인 페이지로 이동
     let loginData = values;
-    // loginData["userEmail"] += "@cau.ac.kr";
     loginData["email"] += "@cau.ac.kr";
 
     const response = await axios.post("/api/account/login/", loginData);
@@ -47,7 +46,6 @@ function LoginPage() {
         >
           <Form.Item
             label="학교 이메일"
-            // name="userEmail"
             name="email"
             rules={[
               {
@@ -58,15 +56,9 @@ function LoginPage() {
           >
             <Input addonAfter="@cau.ac.kr" />
           </Form.Item>
-
           <Form.Item label="비밀번호" name="password" rules={[{ required: true, message: "비밀번호를 입력하세요." }]}>
             <Input.Password />
           </Form.Item>
-
-          {/* <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 7, span: 16 }}>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item> */}
-
           <Form.Item wrapperCol={{ offset: 4, span: 16 }}>
             <Button type="primary" htmlType="submit">
               로그인

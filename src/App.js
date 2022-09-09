@@ -91,10 +91,7 @@ const App = () => {
           </Menu>
         </Sider>
         <Layout className="site-layout">
-          <Header
-            // className="site-layout-background"
-            className={styles.header}
-          >
+          <Header className={styles.header}>
             <div style={{ color: "rgb(110,165,254)" }}>
               {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
                 className: "trigger",
@@ -113,12 +110,9 @@ const App = () => {
           <Content
             className="site-layout-background"
             style={{
-              // margin: "24px 16px",
               height: "90vh",
-              // padding: 24,
               minHeight: 280,
               backgroundColor: "rgb(110,165,254,0.3)",
-              // textAlign: "center",
               padding: 24,
             }}
           >
@@ -138,7 +132,6 @@ const App = () => {
           <Footer
             style={{
               textAlign: "center",
-              // backgroundColor: "rgb(70, 130, 180, 0.5)",
             }}
           >
             MatChing ©2022 Created by SanSuO
