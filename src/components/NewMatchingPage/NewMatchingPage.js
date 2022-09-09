@@ -80,14 +80,14 @@ function NewMatchingPage() {
           </Form.Item>
           <Form.Item label="학과" name={"major"} rules={[{ required: true, message: "학과를 선택하세요" }]}>
             <Select>
-              <Select.Option value="bi">경영학과</Select.Option>
-              <Select.Option value="ec">경제학과</Select.Option>
-              <Select.Option value="ad">광고홍보학과</Select.Option>
-              <Select.Option value="ma">기계공학과</Select.Option>
-              <Select.Option value="gm">국제물류학과</Select.Option>
-              <Select.Option value="st">응용통계학과</Select.Option>
-              <Select.Option value="is">산업보안학과</Select.Option>
-              <Select.Option value="sw">소프트웨어학과</Select.Option>
+              <Select.Option value="경영학과">경영학과</Select.Option>
+              <Select.Option value="경제학과">경제학과</Select.Option>
+              <Select.Option value="광고홍보학과">광고홍보학과</Select.Option>
+              <Select.Option value="기계공학과">기계공학과</Select.Option>
+              <Select.Option value="국제물류학과">국제물류학과</Select.Option>
+              <Select.Option value="응용통계학과">응용통계학과</Select.Option>
+              <Select.Option value="산업보안학과">산업보안학과</Select.Option>
+              <Select.Option value="소프트웨어학과">소프트웨어학과</Select.Option>
               <Select.Option value="all">학과 무관</Select.Option>
             </Select>
           </Form.Item>
