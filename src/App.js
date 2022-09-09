@@ -27,7 +27,7 @@ const App = () => {
 
   axios.defaults.withCredentials = true;
 
-  const [login, setLogin] = useState(true);
+  const [login, setLogin] = useState(false);
   const fetchLogin = async () => {
     const response = await axios.get("/api/account/login_check/");
     console.log("login check response: ", response);
