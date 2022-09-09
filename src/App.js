@@ -45,7 +45,7 @@ const App = () => {
     if (response.data.success) {
       message.success("로그아웃 완료");
       setTimeout(() => {
-        window.location.reload();
+        window.location.replace("/");
       }, 1000);
     } else {
       message.error(response.data.errorMessage);
