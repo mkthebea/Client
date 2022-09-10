@@ -6,6 +6,64 @@ import axios from "axios";
 
 function SignupPage() {
   const [signUp, setSignUp] = useState(false);
+  const { Option } = Select;
+  const majors = [
+    "AI학과",
+    "간호학과",
+    "건축학부",
+    "경영학부",
+    "경제학부",
+    "공공인재학부",
+    "공연영상창작학부(서울)",
+    "공연영상창작학부(안성)",
+    "광고홍보학과",
+    "교육학과",
+    "국어국문학과",
+    "국제물류학과",
+    "글로벌예술학부",
+    "기계공학부",
+    "도시계획·부동산학과",
+    "디자인학부",
+    "문헌정보학과",
+    "물리학과",
+    "미디어커뮤니케이션학부",
+    "미술학부",
+    "사회기반시스템공학부",
+    "사회복지학부",
+    "사회학과",
+    "산업보안학과",
+    "생명과학과",
+    "생명자원공학부",
+    "소프트웨어학부",
+    "수학과",
+    "스포츠과학부",
+    "시스템생명공학과",
+    "식품공학부",
+    "심리학과",
+    "아시아문화학부",
+    "약학부",
+    "에너지시스템공학부",
+    "역사학과",
+    "영어교육과",
+    "영어영문학과",
+    "예술공학부",
+    "유럽문화학부",
+    "유아교육과",
+    "융합공학부",
+    "음악학부",
+    "응용통계학과",
+    "의학부",
+    "전자전기공학부",
+    "전통예술학부",
+    "정치국제학과",
+    "지식경영학부",
+    "차세대반도체학과",
+    "철학과",
+    "첨단소재공학과",
+    "체육교육과",
+    "화학과",
+    "화학신소재공학부",
+  ];
 
   // 닉네임 리스트 서버에 요청
   const [nicknameList, setNicknameList] = useState([]);
@@ -39,11 +97,7 @@ function SignupPage() {
       } else {
         message.error("에러 발생");
       }
-      // console.log("전송 데이터: ", values, "\n응답: ", response);
     });
-    // .catch((error) => {
-    //   console.log(error);
-    // });
   };
 
   const onFinish = async (values) => {
@@ -56,14 +110,6 @@ function SignupPage() {
       values.userEmail += "@cau.ac.kr";
       fetchSignUp(values);
     }
-
-    // fetchSignUp(values);
-    // console.log("Success:", values);
-    // window.location.replace("/");
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -89,7 +135,6 @@ function SignupPage() {
                 remember: true,
               }}
               onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
               autoComplete="off"
             >
               <div className={styles.text}>회원 가입</div>
@@ -151,20 +196,14 @@ function SignupPage() {
                 rules={[
                   {
                     required: true,
-                    message: "비밀번호 확인을 입력하세요.",
+                    message: "학과를 입력하세요.",
                   },
                 ]}
               >
-                <Select>
-                  <Select.Option value="bi">경영학과</Select.Option>
-                  <Select.Option value="ec">경제학과</Select.Option>
-                  <Select.Option value="ad">광고홍보학과</Select.Option>
-                  <Select.Option value="ma">기계공학과</Select.Option>
-                  <Select.Option value="gm">국제물류학과</Select.Option>
-                  <Select.Option value="st">응용통계학과</Select.Option>
-                  <Select.Option value="is">산업보안학과</Select.Option>
-                  <Select.Option value="sw">소프트웨어학과</Select.Option>
-                  <Select.Option value="etc">기타</Select.Option>
+                <Select showSearch optionFilterProp="children" filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}>
+                  {majors.map((m) => (
+                    <Option value={m}>{m}</Option>
+                  ))}
                 </Select>
               </Form.Item>
 

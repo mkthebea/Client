@@ -6,6 +6,63 @@ import axios from "axios";
 function NewMatchingPage() {
   const { TextArea } = Input;
   const { Option } = Select;
+  const majors = [
+    "AI학과",
+    "간호학과",
+    "건축학부",
+    "경영학부",
+    "경제학부",
+    "공공인재학부",
+    "공연영상창작학부(서울)",
+    "공연영상창작학부(안성)",
+    "광고홍보학과",
+    "교육학과",
+    "국어국문학과",
+    "국제물류학과",
+    "글로벌예술학부",
+    "기계공학부",
+    "도시계획·부동산학과",
+    "디자인학부",
+    "문헌정보학과",
+    "물리학과",
+    "미디어커뮤니케이션학부",
+    "미술학부",
+    "사회기반시스템공학부",
+    "사회복지학부",
+    "사회학과",
+    "산업보안학과",
+    "생명과학과",
+    "생명자원공학부",
+    "소프트웨어학부",
+    "수학과",
+    "스포츠과학부",
+    "시스템생명공학과",
+    "식품공학부",
+    "심리학과",
+    "아시아문화학부",
+    "약학부",
+    "에너지시스템공학부",
+    "역사학과",
+    "영어교육과",
+    "영어영문학과",
+    "예술공학부",
+    "유럽문화학부",
+    "유아교육과",
+    "융합공학부",
+    "음악학부",
+    "응용통계학과",
+    "의학부",
+    "전자전기공학부",
+    "전통예술학부",
+    "정치국제학과",
+    "지식경영학부",
+    "차세대반도체학과",
+    "철학과",
+    "첨단소재공학과",
+    "체육교육과",
+    "화학과",
+    "화학신소재공학부",
+  ];
 
   // 모든 식당 이름 가져오기
   const [resList, setResList] = useState([]);
@@ -62,7 +119,7 @@ function NewMatchingPage() {
           layout="horizontal"
           onFinish={onFinish}
         >
-          <Form.Item label="식당 이름" name={"name"} rules={[{ required: true, message: "식당 이름을 입력하세요" }]}>
+          <Form.Item label="식당 이름" name={"name"} rules={[{ required: true, message: "식당 이름을 선택하세요" }]}>
             <Select showSearch placeholder="식당 검색" optionFilterProp="children" filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}>
               {resList.map((r) => (
                 <Option value={r}>{r}</Option>
@@ -77,16 +134,10 @@ function NewMatchingPage() {
             </Select>
           </Form.Item>
           <Form.Item label="학과" name={"major"} rules={[{ required: true, message: "학과를 선택하세요" }]}>
-            <Select>
-              <Select.Option value="경영학과">경영학과</Select.Option>
-              <Select.Option value="경제학과">경제학과</Select.Option>
-              <Select.Option value="광고홍보학과">광고홍보학과</Select.Option>
-              <Select.Option value="기계공학과">기계공학과</Select.Option>
-              <Select.Option value="국제물류학과">국제물류학과</Select.Option>
-              <Select.Option value="응용통계학과">응용통계학과</Select.Option>
-              <Select.Option value="산업보안학과">산업보안학과</Select.Option>
-              <Select.Option value="소프트웨어학과">소프트웨어학과</Select.Option>
-              <Select.Option value="all">학과 무관</Select.Option>
+            <Select showSearch placeholder="학과 검색" optionFilterProp="children" filterOption={(input, option) => option.children.toLowerCase().includes(input.toLowerCase())}>
+              {majors.map((m) => (
+                <Option value={m}>{m}</Option>
+              ))}
             </Select>
           </Form.Item>
           <Form.Item label="만남 모드" name={"mode"} rules={[{ required: true, message: "만남 모드를 선택하세요" }]}>
