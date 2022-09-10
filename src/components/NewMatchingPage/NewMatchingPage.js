@@ -11,13 +11,12 @@ function NewMatchingPage() {
   const [resList, setResList] = useState([]);
   const fetchResList = async () => {
     const response = await axios.get("/api/matzip/");
-    console.log("식당 리스트 response: ", response);
+    // console.log("식당 리스트 response: ", response);
     if (response.data.success) {
       setResList(response.data.resList);
     } else {
       message.error(response.data.errorMessage);
     }
-    // setResList(["우뇽파스타", "북촌순두부"]);
   };
   useEffect(() => {
     fetchResList();
@@ -34,12 +33,11 @@ function NewMatchingPage() {
       data["startTime"] = data["date"] + " " + data["startTime"].format("HH:MM");
       delete data.date;
 
-      // 매칭 등록 요청 보내기
+      // 새 맛칭 등록 요청
       const response = await axios.post("/api/matching/new/", data);
-      console.log("new matching send data: ", data);
-      console.log("new matching response: ", response);
+      // console.log("new matching send data: ", data);
+      // console.log("new matching response: ", response);
       if (response.data.success) {
-        console.log("Success:", data);
         message.success("등록 완료!");
         setTimeout(() => {
           window.location.replace("/");

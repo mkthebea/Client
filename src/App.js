@@ -1,7 +1,7 @@
 import { HomeOutlined, LoginOutlined, LogoutOutlined, ClockCircleOutlined, PlusCircleOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import { Layout, Menu, message } from "antd";
 import "antd/dist/antd.min.css";
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import DetailPage from "./components/DetailPage/DetailPage";
 import LoginPage from "./components/LoginPage/LoginPage";
@@ -15,9 +15,7 @@ import AuthFailedPage from "./components/AuthFailedPage/AuthFailedPage";
 import NotFound from "./components/NotFound/NotFound";
 
 import axios from "axios";
-
 import styles from "./App.module.css";
-import Logo from "./Logo.jpg";
 import newLogo from "./newLogo.png";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -27,19 +25,20 @@ const App = () => {
 
   axios.defaults.withCredentials = true;
 
+  // 로그인 상태 확인
   const [login, setLogin] = useState(false);
   const fetchLogin = async () => {
     const response = await axios.get("/api/account/login_check/");
-    console.log("login check response: ", response);
+    // console.log("login check response: ", response);
     if (response.data.success) {
       setLogin(true);
     }
   };
-
   useEffect(() => {
     fetchLogin();
   }, []);
 
+  // 로그아웃
   const logout = async () => {
     const response = await axios.post("/api/account/logout/");
     if (response.data.success) {

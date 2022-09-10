@@ -1,24 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Button, Checkbox, Form, Input, message, Alert } from "antd";
+import React from "react";
+import { Button, Form, Input, message, Alert } from "antd";
 import styles from "./RegisterPage.module.css";
 import axios from "axios";
 
 function RegisterPage() {
+  // 맛집 등록 요청
   const onFinish = async (values) => {
     values["name"] = values["name"].split(" ").join(""); //문자열 공백 제거
-
     const response = await axios.post("/api/matzip/", values);
-    console.log("register send data: ", values);
-    console.log("register response: ", response);
+    // console.log("register send data: ", values);
+    // console.log("register response: ", response);
     if (response.data.success) {
       message.success("식당 등록 성공!");
     } else {
       message.error(response.data.errorMessage);
     }
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -36,7 +32,6 @@ function RegisterPage() {
             span: 8,
           }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
           <Form.Item

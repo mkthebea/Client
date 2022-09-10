@@ -11,10 +11,10 @@ function AuthFailedPage() {
         <Button
           type="primary"
           onClick={() => {
-            window.location.replace("/signup");
+            window.location.replace("/login");
           }}
         >
-          회원가입
+          로그인
         </Button>
       }
     />
