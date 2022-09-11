@@ -218,8 +218,8 @@ function SignupPage() {
                 ]}
               >
                 <Select>
-                  <Select.Option value="w">여성</Select.Option>
-                  <Select.Option value="m">남성</Select.Option>
+                  <Select.Option value="F">여성</Select.Option>
+                  <Select.Option value="M">남성</Select.Option>
                 </Select>
               </Form.Item>
 
