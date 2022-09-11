@@ -225,7 +225,7 @@ function MyMatchingPage() {
                   {item.status === "done" ? (
                     <Button
                       onClick={() => {
-                        onReport(item.id, item.follower);
+                        onReport(item.id, item.member);
                       }}
                       className={styles.content_button}
                     >
