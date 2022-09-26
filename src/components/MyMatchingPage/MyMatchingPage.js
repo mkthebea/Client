@@ -193,6 +193,7 @@ function MyMatchingPage() {
           }}
           dataSource={userMatchingList}
           // dataSource={testData}
+          className={styles.list}
           renderItem={(item) => (
             <List.Item>
               <Card title={item.name} hoverable="true" headStyle={{ fontSize: "18px" }} className={!item.is_closed && !item.is_matched ? styles.waiting : null}>

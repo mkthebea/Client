@@ -18,6 +18,10 @@
     height: 85vh;
 }
 
+.list {
+    overflow:hidden auto;
+}
+
 .text {
     font-size: 30px;
     margin: 20px;
