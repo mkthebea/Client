@@ -107,7 +107,7 @@ function DetailPage(props) {
                   <Descriptions.Item label="매칭 조건">
                     성별: {[...matchings[i].tags][0] === "F" ? "여성" : [...matchings[i].tags][0] === "M" ? "남성" : "성별 무관"} <br />
                     학과: {[...matchings[i].tags][1]} <br />
-                    만남 모드: {[...matchings[i].tags][2] ? "밥만 먹어요" : "우리 친해져요"} <br />
+                    만남 모드: {[...matchings[i].tags][2] ? "우리 친해져요" : "밥만 먹어요"} <br />
                   </Descriptions.Item>
                   <Descriptions.Item label="시작 시간">{matchings[i].startTime}</Descriptions.Item>
                   <Descriptions.Item label="끝나는 시간">{matchings[i].endTime}</Descriptions.Item>
