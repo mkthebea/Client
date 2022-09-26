@@ -79,8 +79,8 @@ function SignupPage() {
   const fetchSignUp = async (values) => {
     const accountData = { userEmail: values.userEmail, password: values.password };
     let profileData = { nickname: values.nickname, major: values.major, gender: values.gender };
-    console.log("sign up: ", accountData);
-    console.log("profile: ", profileData);
+    // console.log("sign up: ", accountData);
+    // console.log("profile: ", profileData);
 
     await axios.post("/api/account/signup/", accountData).then((response) => {
       if (response.data.success) {
