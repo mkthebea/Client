@@ -12,6 +12,9 @@ function RegisterPage() {
     // console.log("register response: ", response);
     if (response.data.success) {
       message.success("식당 등록 성공!");
+      setTimeout(() => {
+        window.location.replace("/");
+      }, 1000);
     } else {
       message.error(response.data.errorMessage);
     }
