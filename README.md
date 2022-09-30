@@ -15,7 +15,7 @@
 <br>
 <br>
 
-#작품 소개
+# 작품 소개
 <div style="line-height:2;"><span style="font-size:12pt;color:rgb(0,117,200);font-family:'나눔고딕', NanumGothic;"><b>중앙대학교 학생들을 위해 학교 근처의 맛집을 중심으로 식사 약속 매칭 서비스를 제공하는 웹 플랫폼</b></span>&nbsp;</div><div><span style="font-family:'나눔고딕', NanumGothic;font-size:10pt;color:rgb(99,99,99);">* 맛칭이란? 영어 단어 "matching"과 "맛집"을 결합한 단어로 "mat"을 "맛"이라고 발음할 수 있는 점에 착안하여 만들어진 식사 약속 매칭 서비스의 명칭이다.</span></div><div><br></div><div style="line-height:2;"><span style="font-size:12pt;font-family:'나눔고딕', NanumGothic;"><b>용어 정의</b></span></div><div><div style="line-height:2;"><span style="font-family:'나눔고딕', NanumGothic;font-size:11pt;">- ‘밥약’이란 밥 약속의 줄임말로, 선후배 또는 동기들끼리 식사를 하며 친목을 다지는 것을 의미한다.</span></div><div style="line-height:2;"><span style="font-family:'나눔고딕', NanumGothic;font-size:11pt;">- ‘매칭 서비스’란 공통의 목표를 가진 서로 다른 두 명 이상의 사람을 연결해 주는 서비스를 의미한다.</span></div><div style="line-height:2;"><span style="font-family:'나눔고딕', NanumGothic;font-size:11pt;">- ‘맛집’이란 음식의 맛이 뛰어나기로 유명한 음식점을 의미한다. 본 서비스에서는 중앙대학교 근처인 흑석동과 상도동에 위치한 음식점들 중 중앙대학교 학생들에게 유명한 음식점을 의미한다.</span></div><div style="line-height:2;"><span style="font-family:'나눔고딕', NanumGothic;font-size:11pt;">- ‘주최자’란 본 서비스를 통해 밥 약속을 주도하는 사람을 의미한다.</span></div><div style="line-height:2;"><span style="font-family:'나눔고딕', NanumGothic;font-size:11pt;">- ‘참여자’란 주최자가 주도한 밥 약속에 참여를 신청하는 사람을 의미한다.</span></div></div>
 <br>
 
