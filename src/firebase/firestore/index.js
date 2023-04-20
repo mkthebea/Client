@@ -1,4 +1,4 @@
-import { db } from "./index";
+import { db } from "../index";
 import { collection, getDocs } from "firebase/firestore";
 
 // 사용 가능한 collection 이름

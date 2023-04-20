@@ -6,7 +6,7 @@ import styles from "./MainPage.module.css";
 import axios from "axios";
 
 import DetailPage from "../DetailPage/DetailPage";
-import { getAccounts } from "../../firebase/accounts";
+import { getAccounts } from "../../firebase/firestore/accounts";
 
 function MainPage() {
   // 모달 관리

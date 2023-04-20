@@ -1,4 +1,4 @@
-import { getDocsWithFormat } from "./firestore";
+import { getDocsWithFormat } from "./index";
 
 const COLLECTION_NAME = "accounts";
 
