@@ -6,7 +6,7 @@ import styles from "./MainPage.module.css";
 import axios from "axios";
 
 import DetailPage from "../DetailPage/DetailPage";
-import { getAccounts } from "../../firebase/firestore/accounts";
+import { signUp } from "../../firebase/auth";
 
 function MainPage() {
   // 모달 관리
@@ -780,14 +780,7 @@ function MainPage() {
 
   return (
     <div className={styles.container}>
-      <Button
-        onClick={async () => {
-          const accounts = await getAccounts();
-          alert(JSON.stringify(accounts));
-        }}
-      >
-        API Test!
-      </Button>
+      <Button onClick={async () => {}}>API Test!</Button>
       <h1>
         <span>대</span>
         <span>기</span>
