@@ -1,4 +1,4 @@
-import { createDocument, getDocsWithFormat } from "./index";
+import { createDocument, getDocsWithFormat } from "./core";
 
 const COLLECTION_NAME = "accounts";
 

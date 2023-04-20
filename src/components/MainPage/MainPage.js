@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
-import { SearchOutlined, LoadingOutlined } from "@ant-design/icons";
-import { Button, Input, Space, Table, Tag, Modal, message } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import { Button, Input, Modal, Space, Table, Tag, message } from "antd";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import styles from "./MainPage.module.css";
-import axios from "axios";
 
+import { getUser } from "../../firebase/auth/core";
 import DetailPage from "../DetailPage/DetailPage";
-import { signUp } from "../../firebase/auth";
 
 function MainPage() {
   // 모달 관리
@@ -780,7 +780,13 @@ function MainPage() {
 
   return (
     <div className={styles.container}>
-      <Button onClick={async () => {}}>API Test!</Button>
+      <Button
+        onClick={async () => {
+          alert(JSON.stringify(getUser()));
+        }}
+      >
+        API Test!
+      </Button>
       <h1>
         <span>대</span>
         <span>기</span>

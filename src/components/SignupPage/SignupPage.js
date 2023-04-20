@@ -1,18 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { SmileOutlined } from "@ant-design/icons";
-import {
-  Button,
-  Checkbox,
-  Form,
-  Input,
-  message,
-  Select,
-  Alert,
-  Result,
-} from "antd";
+import { Button, Form, Input, message, Select, Alert, Result } from "antd";
 import styles from "./SignupPage.module.css";
 
-import { signUp as doSignUp } from "../../firebase/auth/signUp";
+import { signUp as doSignUp } from "../../firebase/auth/core";
 
 function SignupPage() {
   const [signUp, setSignUp] = useState(false);
@@ -35,8 +26,7 @@ function SignupPage() {
       );
       console.log("accessToken:", accessToken);
       console.log("profileId:", profileId);
-
-      alert(JSON.stringify(accessToken));
+      message.success("회원 가입 성공");
     } catch (e) {
       alert(`${e.code} : ${e.message}`);
     }
