@@ -6,6 +6,7 @@ import styles from "./MainPage.module.css";
 import axios from "axios";
 
 import DetailPage from "../DetailPage/DetailPage";
+import { getAccounts } from "../../firebase/accounts";
 
 function MainPage() {
   // 모달 관리
@@ -107,7 +108,12 @@ function MainPage() {
   };
 
   const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+    }) => (
       <div
         style={{
           padding: 8,
@@ -117,7 +123,9 @@ function MainPage() {
           ref={searchInput}
           placeholder={`Search ${dataIndex}`}
           value={selectedKeys[0]}
-          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onChange={(e) =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
           style={{
             marginBottom: 8,
@@ -155,7 +163,8 @@ function MainPage() {
         }}
       />
     ),
-    onFilter: (value, record) => record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+    onFilter: (value, record) =>
+      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
     onFilterDropdownVisibleChange: (visible) => {
       if (visible) {
         setTimeout(() => searchInput.current?.select(), 100);
@@ -405,7 +414,8 @@ function MainPage() {
           startTime: "2022-09-06 16:00",
           endTime: "2022-09-06 18:00",
           duration: "2시간",
-          description: "뚝배기 파스타가 유명한 집입니다. 무료로 양 추가 할 수 있어요~!",
+          description:
+            "뚝배기 파스타가 유명한 집입니다. 무료로 양 추가 할 수 있어요~!",
           max: 5,
           id: 1,
           follower: ["영갬", "오구"],
@@ -770,6 +780,14 @@ function MainPage() {
 
   return (
     <div className={styles.container}>
+      <Button
+        onClick={async () => {
+          const accounts = await getAccounts();
+          alert(JSON.stringify(accounts));
+        }}
+      >
+        API Test!
+      </Button>
       <h1>
         <span>대</span>
         <span>기</span>
@@ -781,7 +799,13 @@ function MainPage() {
         <span>!</span>
       </h1>
       <div className={styles.table_container}>
-        <Table scroll={{ y: "65vh" }} pagination={false} columns={columns} dataSource={matchingList} className={styles.table} />
+        <Table
+          scroll={{ y: "65vh" }}
+          pagination={false}
+          columns={columns}
+          dataSource={matchingList}
+          className={styles.table}
+        />
       </div>
       <Modal
         title="매칭 신청"
@@ -795,7 +819,11 @@ function MainPage() {
         width="80%"
         className={styles.modal}
       >
-        <DetailPage data={modalData} setId={setId} setButtonDisabled={setButtonDisabled} />
+        <DetailPage
+          data={modalData}
+          setId={setId}
+          setButtonDisabled={setButtonDisabled}
+        />
       </Modal>
     </div>
   );

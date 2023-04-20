@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Firebase
+soma-babyak-firebase-adminsdk-wg1rc-8d75b8a06a.json

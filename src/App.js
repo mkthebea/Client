@@ -1,4 +1,12 @@
-import { HomeOutlined, LoginOutlined, LogoutOutlined, ClockCircleOutlined, PlusCircleOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import {
+  HomeOutlined,
+  LoginOutlined,
+  LogoutOutlined,
+  ClockCircleOutlined,
+  PlusCircleOutlined,
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+} from "@ant-design/icons";
 import { Layout, Menu, message } from "antd";
 import "antd/dist/antd.min.css";
 import React, { useState, useEffect } from "react";
@@ -53,12 +61,27 @@ const App = () => {
 
   return (
     <Router>
-      <Layout className={styles.font}>
-        <Sider trigger={null} collapsible collapsed={collapsed} theme="dark" style={{ backgroundColor: "rgb(110,165,254)" }}>
+      <Layout className={styles.font} on>
+        <Sider
+          trigger={null}
+          collapsible
+          collapsed={collapsed}
+          theme="dark"
+          style={{ backgroundColor: "rgb(110,165,254)" }}
+        >
           <Link to="/">
             <img src={newLogo} className={styles.logo} />
           </Link>
-          <Menu theme="light" mode="inline" defaultSelectedKeys={["main"]} style={{ backgroundColor: "rgb(110,165,254)", color: "white", fontSize: "20px" }}>
+          <Menu
+            theme="light"
+            mode="inline"
+            defaultSelectedKeys={["main"]}
+            style={{
+              backgroundColor: "rgb(110,165,254)",
+              color: "white",
+              fontSize: "20px",
+            }}
+          >
             <Menu.Item key="main" icon={<HomeOutlined />}>
               <Link to="/" className={styles.menu_link}>
                 메인 페이지
@@ -92,13 +115,18 @@ const App = () => {
         <Layout className="site-layout">
           <Header className={styles.header}>
             <div style={{ color: "rgb(110,165,254)" }}>
-              {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-                className: "trigger",
-                onClick: () => setCollapsed(!collapsed),
-              })}
+              {React.createElement(
+                collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
+                {
+                  className: "trigger",
+                  onClick: () => setCollapsed(!collapsed),
+                }
+              )}
             </div>
             <div className={styles.food_container}>
-              <div className={styles.text}>맛집 매칭은, 맛칭!&nbsp;&nbsp;&nbsp;</div>
+              <div className={styles.text}>
+                맛집 매칭은, 맛칭!&nbsp;&nbsp;&nbsp;
+              </div>
               <div className={styles.food}>🍔</div>
               <div className={styles.food2}>🍜</div>
               <div className={styles.food}>🍕</div>
@@ -120,10 +148,19 @@ const App = () => {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/signup/success" element={<SignupSuccessPage />} />
-              <Route path="/register" element={login ? <RegisterPage /> : <AuthFailedPage />} />
+              <Route
+                path="/register"
+                element={login ? <RegisterPage /> : <AuthFailedPage />}
+              />
               <Route path="/detail" element={<DetailPage />} />
-              <Route path="/mymatching" element={login ? <MyMatchingPage /> : <AuthFailedPage />} />
-              <Route path="/newmatching" element={login ? <NewMatchingPage /> : <AuthFailedPage />} />
+              <Route
+                path="/mymatching"
+                element={login ? <MyMatchingPage /> : <AuthFailedPage />}
+              />
+              <Route
+                path="/newmatching"
+                element={login ? <NewMatchingPage /> : <AuthFailedPage />}
+              />
               <Route path="/authfailed" element={<AuthFailedPage />} />
               <Route path="/*" element={<NotFound />} />
             </Routes>
