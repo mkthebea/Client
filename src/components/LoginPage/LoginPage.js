@@ -1,29 +1,32 @@
-import { React, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { React } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-import { Button, Checkbox, Form, Input, message } from "antd";
+import { Button, Form, Input, message } from "antd";
 import styles from "./LoginPage.module.css";
-import axios from "axios";
 
-function LoginPage() {
+import { signIn } from "../../firebase/auth/core";
+
+function LoginPage(props) {
+  // 메인 페이지의 로그인 여부 속성을 제어
+  const { setIsLoggedIn } = props;
+
+  const navigate = useNavigate();
+
   const onFinish = async (values) => {
-    // 로그인 성공시 메인 페이지로 이동
     let loginData = values;
-    loginData["email"] += "@cau.ac.kr";
 
-    const response = await axios.post("/api/account/login/", loginData);
-    console.log("login send data: ", values);
-    console.log("login response: ", response);
-    if (response.data.success) {
+    try {
+      const accessToken = await signIn(loginData.email, loginData.password);
+      setIsLoggedIn(true);
+
+      // 로그인 성공시 1초 후 메인 페이지로 이동
       message.success("로그인 성공");
       setTimeout(() => {
-        window.location.replace("/");
+        navigate("/", { replace: true });
       }, 1000);
-    } else {
-      message.error("로그인 실패");
+    } catch (e) {
+      message.error(`로그인 실패: ${e.message}`);
     }
-
-    // fetchLogin();
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -45,18 +48,26 @@ function LoginPage() {
           autoComplete="off"
         >
           <Form.Item
-            label="학교 이메일"
+            label="이메일"
             name="email"
             rules={[
               {
                 required: true,
-                message: "학교 이메일 주소를 입력하세요.",
+                message: "이메일을 입력해 주세요.",
+              },
+              {
+                type: "email",
+                message: "이메일 형식을 확인하세요.",
               },
             ]}
           >
-            <Input addonAfter="@cau.ac.kr" />
+            <Input />
           </Form.Item>
-          <Form.Item label="비밀번호" name="password" rules={[{ required: true, message: "비밀번호를 입력하세요." }]}>
+          <Form.Item
+            label="비밀번호"
+            name="password"
+            rules={[{ required: true, message: "비밀번호를 입력하세요." }]}
+          >
             <Input.Password />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 4, span: 16 }}>
